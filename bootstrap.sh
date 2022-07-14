@@ -1,4 +1,6 @@
+#!/bin/bash
+
 apt update
-apt upgrade -y
+apt full-upgrade -y
 
 apt install ansible aptitude -y
