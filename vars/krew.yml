@@ -1,3 +1,4 @@
 ---
+krew_bin_path: "{{ brew_path }}/kubectl-krew"
 krew_plugins:
   - "ingress-nginx"

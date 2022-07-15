@@ -1,7 +1,7 @@
 ---
 - name: Check if brew is already installed
   stat:
-    path: /home/linuxbrew/.linuxbrew/bin/brew
+    path: "{{ brew_bin_path }}"
   register: brew
 
 - name: Install brew

@@ -4,4 +4,3 @@
     name: michaelwasher.krew
   vars:
     krew_user: "{{ user }}"
-    krew_bin_path: /home/linuxbrew/.linuxbrew/bin/kubectl-krew
