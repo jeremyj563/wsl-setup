@@ -1,0 +1,15 @@
+---
+apt_packages:
+  - apt-transport-https
+  - iputils-ping
+  - openssh-server
+  - openssh-client
+  - gcc
+  - sudo
+  - nano
+  - vim
+  - git
+  - curl
+  - tmux
+  - unzip
+  - fzf

@@ -1,0 +1,10 @@
+---
+brew_packages:
+  - bat
+  - kubectl
+  - helm
+  - derailed/k9s/k9s
+  - argocd
+  - argocd-autopilot
+  - krew
+  - nvm

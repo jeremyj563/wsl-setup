@@ -1,0 +1,16 @@
+---
+- name: Create ~/.bash_profile
+  copy:
+    src: .bash_profile
+    dest: ~/.bash_profile
+    owner: wsl
+    group: wsl
+    mode: '0644'
+
+- name: Create empty directory ~/.bash_profile.d
+  file:
+    path: ~/.bash_profile.d
+    state: directory
+    owner: wsl
+    group: wsl
+    mode: '0755'

@@ -1,10 +1,10 @@
 ---
-- name: update package list
+- name: Update apt package list
   become: true
   package:
     update_cache: yes
 
-- name: upgrade all packages
+- name: Upgrade all apt packages
   become: true
   package:
     name: "*"
@@ -13,4 +13,4 @@
 - name: Install packages
   become: true
   apt:
-    name: "{{ prerequisite_packages }}"
+    name: "{{ apt_packages }}"

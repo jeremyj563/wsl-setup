@@ -1,0 +1,4 @@
+
+---
+- include_tasks: homebrew.yml
+- include_tasks : packages.yml

@@ -1,0 +1,9 @@
+---
+- name: Install nvm and nodejs
+  include_role:
+    name: morgangraphics.ansible_role_nvm
+  vars:
+    become_user: wsl
+    become: true
+    nodejs_version: '16'
+    nvm_profile: "/home/wsl/.bashrc"

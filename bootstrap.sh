@@ -1,6 +1,10 @@
 #!/bin/bash
 
-apt update
-apt full-upgrade -y
+yes | sudo apt-add-repository ppa:ansible/ansible
 
-apt install ansible aptitude -y
+sudo apt update
+sudo apt full-upgrade -y
+
+sudo apt install ansible aptitude -y
+
+ansible-galaxy install -r requirements.yml
