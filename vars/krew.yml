@@ -1,0 +1,3 @@
+---
+krew_plugins:
+  - "ingress-nginx"

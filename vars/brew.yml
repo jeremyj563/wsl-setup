@@ -4,6 +4,7 @@ brew_packages:
   - kubectl
   - helm
   - derailed/k9s/k9s
+  - kubeseal
   - argocd
   - argocd-autopilot
   - krew

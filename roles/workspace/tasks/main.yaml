@@ -1,7 +1,16 @@
 ---
-- name: install workspace directory
-  file: path='{{ lookup("env", "HOME") }}/{{ repo_directory }}' state=directory
+- name: Create workspace directory {{ workspace_dir }}
+  file:
+    path: "{{ workspace_dir }}"
+    state: directory
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: '0755'
 
-- name: install workspace repos
-  action: shell cd {{ lookup("env", "HOME") }}/{{ repo_directory}} && (test -d `basename {{ item }} .git` || git clone {{ item }})
-  with_items: "{{ repos }}"
+- name: Clone workspace git repos
+  git:
+    repo: "{{ repo.url }}"
+    dest: "{{ workspace_dir }}/{{ repo.name }}"
+  with_items: "{{ workspace_repos }}"
+  loop_control:
+    loop_var: repo

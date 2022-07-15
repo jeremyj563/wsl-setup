@@ -37,7 +37,7 @@ git clone https://github.com/jeremyj563/wsl-setup.git
 bash bootstrap.sh
 
 # Run the playbook
-ansible-playbook -K playbook.yml
+ansible-playbook --ask-become-pass playbook-setup.yml
 ```
 
 ## What do you get?

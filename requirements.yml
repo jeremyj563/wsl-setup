@@ -1,2 +1,3 @@
 ---
 - src: morgangraphics.ansible_role_nvm
+- src: michaelwasher.krew

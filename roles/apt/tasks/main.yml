@@ -7,10 +7,10 @@
 - name: Upgrade all apt packages
   become: true
   package:
-    name: "*"
+    name: '*'
     state: latest
 
-- name: Install packages
+- name: Install apt packages
   become: true
   apt:
     name: "{{ apt_packages }}"

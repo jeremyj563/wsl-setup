@@ -1,0 +1,9 @@
+---
+- name: Check if brew is already installed
+  stat:
+    path: /home/linuxbrew/.linuxbrew/bin/brew
+  register: brew
+
+- name: Install brew
+  script: install-homebrew.sh
+  when: not brew.stat.exists

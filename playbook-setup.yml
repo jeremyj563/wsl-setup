@@ -1,0 +1,17 @@
+- hosts: localhost
+  vars:
+    user: wsl
+  vars_files:
+    - vars/shell.yml
+    - vars/workspace.yml
+    - vars/apt.yml
+    - vars/brew.yml
+    - vars/krew.yml
+    - vars/nvm.yml
+  roles:
+    - shell
+    - workspace
+    - apt
+    - brew
+    - krew
+    - nvm

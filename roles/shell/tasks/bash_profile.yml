@@ -1,16 +1,28 @@
 ---
-- name: Create ~/.bash_profile
+- name: Create script ~/.bash_profile
   copy:
     src: .bash_profile
     dest: ~/.bash_profile
-    owner: wsl
-    group: wsl
+    owner: "{{ user }}"
+    group: "{{ user }}"
     mode: '0644'
 
-- name: Create empty directory ~/.bash_profile.d
+- name: Create directory ~/.bash_profile.d
   file:
     path: ~/.bash_profile.d
     state: directory
-    owner: wsl
-    group: wsl
+    owner: "{{ user }}"
+    group: "{{ user }}"
     mode: '0755'
+
+- name: Create scripts in ~/.bash_profile.d
+  copy:
+    src: "{{ script }}"
+    dest: "~/.bash_profile.d/{{ script }}"
+    owner: "{{ user }}"
+    group: "{{ user }}"
+    mode: '0644'
+  with_items: "{{ bash_profile_scripts }}"
+  loop_control:
+    loop_var: script
+  

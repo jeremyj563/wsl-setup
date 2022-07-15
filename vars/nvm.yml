@@ -1,0 +1,3 @@
+---
+nvm_profile: "/home/{{ user }}/.bashrc"
+nodejs_version: '16'
