@@ -1,4 +1,4 @@
-# Setup
+# WSL Setup
 Ansible config for setting up an Ubuntu dev environment in WSL
 
 ## Quick Start
