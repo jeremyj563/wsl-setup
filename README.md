@@ -1,15 +1,11 @@
 # WSL Setup
 
-- [WSL Setup](#wsl-setup)
-  - [Synopsis](#synopsis)
-  - [Quick Start](#quick-start)
-
 ## Synopsis
 Ansible config for setting up an Ubuntu dev environment in WSL
 
 ## Quick Start
 Perform the following steps locally on a fresh Ubuntu installation:
-```bash
+```sh
 # 1. Clone this repo into your source code workspace folder
 $ git clone https://github.com/jeremyj563/wsl-setup.git ./wsl-setup && cd $_
 
