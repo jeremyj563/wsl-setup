@@ -1,9 +1,17 @@
 ---
 - name: Create config file /etc/wsl.conf
   copy:
-    src: wsl.conf
-    dest: /etc/wsl.conf
     owner: root
     group: root
     mode: '0644'
+    dest: /etc/wsl.conf
+    content:
+      |
+      # Ansible managed
+
+      [user]
+      default=wsl
+
+      [network]
+      generateResolvConf = false
   become: true
