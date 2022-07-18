@@ -18,13 +18,21 @@ wsl-setup$ bash bootstrap.sh
     vars:
         user: <linux-user>
 
-# 4. Optionally configure vars/workspace.yml if there are any repos you want to clone
+# 4. Configure resolv.conf settings in vars/resolv.yml
+    ---
+    resolv_nameservers:
+    - <primary-dns>
+    - <secondary-dns>
+    resolv_search:
+    - <search-domain>
+
+# 5. Optionally configure vars/workspace.yml if there are any repos you want to clone
     ---
     workspace_dir: <workspace-dir>
     workspace_repos:
     - name: <repo-name>
         url: <repo-url>
 
-# 5. Finally, run the playbook:
+# 6. Finally, run the playbook:
 wsl-setup$ ansible-playbook --ask-become-pass playbook-wsl-setup.yml
 ```

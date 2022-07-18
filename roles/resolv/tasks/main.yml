@@ -1,0 +1,15 @@
+---
+- name: Create /etc/resolv.conf
+  file:
+    path: /etc/resolv.conf
+    state: touch
+    owner: root
+    group: root
+    mode: '0644'
+  become: true
+
+- name: Configure /etc/resolv.conf
+  include_role:
+    name: ahuffman.resolv
+  vars:
+    become: true

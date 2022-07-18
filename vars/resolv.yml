@@ -1,0 +1,6 @@
+---
+resolv_nameservers:
+- '10.1.0.10'
+- '173.16.48.4'
+resolv_search:
+- 'citrix-dch.local'

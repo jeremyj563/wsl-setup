@@ -1,9 +1,12 @@
+# EXAMPLE:
+# ansible-playbook --ask-become-pass playbook-wsl-setup.yml
 ---
 - hosts: localhost
   vars:
     user: wsl
   vars_files:
     - vars/shell.yml
+    - vars/resolv.yml
     - vars/workspace.yml
     - vars/apt.yml
     - vars/brew.yml
@@ -12,6 +15,7 @@
   roles:
     - wsl
     - shell
+    - resolv
     - workspace
     - apt
     - brew
