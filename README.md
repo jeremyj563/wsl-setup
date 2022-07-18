@@ -20,11 +20,11 @@ wsl-setup$ bash bootstrap.sh
     ---
     - hosts: localhost
     vars:
-        user: <linux-username>
+        user: <linux-user>
 
 # 4. Optionally configure vars/workspace.yml if there are any repos you want to clone
     ---
-    workspace_dir: ~/source/repos
+    workspace_dir: <workspace-dir>
     workspace_repos:
     - name: <repo-name>
         url: <repo-url>
