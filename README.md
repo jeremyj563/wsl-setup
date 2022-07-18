@@ -12,5 +12,5 @@ $ git clone https://github.com/jeremyj563/wsl-setup.git
 $ bash bootstrap.sh
 
 # Finally, run the playbook:
-$ ansible-playbook --ask-become-pass playbook-setup.yml
+$ ansible-playbook --ask-become-pass playbook-wsl-setup.yml
 ```

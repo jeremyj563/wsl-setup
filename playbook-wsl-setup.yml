@@ -9,6 +9,7 @@
     - vars/krew.yml
     - vars/nvm.yml
   roles:
+    - wsl
     - shell
     - workspace
     - apt
