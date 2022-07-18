@@ -6,7 +6,7 @@ Just run these commands locally on a fresh Ubuntu installation
 ```sh
 $ git clone https://github.com/jeremyj563/wsl-setup.git
 
-# First set your linux user in playbook-setup.yaml (optionally configure vars/workspace.yml)
+# First set your linux user in playbook-wsl-setup.yml (optionally configure vars/workspace.yml)
 
 # Then run this script to install ansible and the playbook's requirements:
 $ bash bootstrap.sh
