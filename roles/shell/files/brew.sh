@@ -1,2 +1,3 @@
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# Ansible managed
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"

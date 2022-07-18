@@ -1,2 +1,3 @@
-export HISTTIMEFORMAT="%d/%m/%y %T "
+# Ansible managed
 
+export HISTTIMEFORMAT="%d/%m/%y %T "

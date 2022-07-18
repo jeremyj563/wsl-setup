@@ -1,2 +1,3 @@
-export PATH="${PATH}:${HOME}/.krew/bin"
+# Ansible managed
 
+export PATH="${PATH}:${HOME}/.krew/bin"
