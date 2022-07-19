@@ -66,7 +66,7 @@ function Set-UbuntuConfig {
 
         [Parameter(Mandatory=$false)]
         [Alias('u')]
-        [string] $DistroUri = 'https://aka.ms/wslubuntu',
+        [string] $DistroUri = 'https://wsldownload.azureedge.net/Ubuntu.2020.424.0_x64.appx',
 
         [Parameter(Mandatory=$false)]
         [Alias('d')]
