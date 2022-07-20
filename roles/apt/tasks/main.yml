@@ -1,16 +1,16 @@
 ---
 - name: Update apt package list
-  become: true
   package:
     update_cache: yes
+  become: true
 
 - name: Upgrade all apt packages
-  become: true
   package:
     name: '*'
     state: latest
+  become: true
 
 - name: Install apt packages
-  become: true
   apt:
     name: "{{ apt_packages }}"
+  become: true

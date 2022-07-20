@@ -3,8 +3,8 @@
   file:
     path: "{{ workspace_dir }}"
     state: directory
-    owner: "{{ user }}"
-    group: "{{ user }}"
+    owner: "{{ linux_username }}"
+    group: "{{ linux_username }}"
     mode: '0755'
 
 - name: Clone workspace git repos

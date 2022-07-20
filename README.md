@@ -34,5 +34,5 @@ wsl-setup$ bash bootstrap.sh
         url: <repo-url>
 
 # 6. Finally, run the playbook:
-wsl-setup$ ansible-playbook --ask-become-pass playbook-wsl-setup.yml
+wsl-setup$ ansible-playbook playbook-wsl-setup.yml
 ```

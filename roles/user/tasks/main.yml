@@ -1,0 +1,19 @@
+---
+- name: Add user '{{ linux_username }}'
+  user:
+    name: "{{ linux_username }}"
+    password: "{{ linux_password | password_hash('sha256') }}"
+    uid: 1000
+    shell: /bin/bash
+    groups:
+      - adm
+      - dialout
+      - cdrom
+      - floppy
+      - sudo
+      - audio
+      - dip
+      - video
+      - plugdev
+      - netdev
+  become: true

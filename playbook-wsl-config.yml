@@ -1,0 +1,20 @@
+# EXAMPLE:
+# ansible-playbook playbook-wsl-config.yml
+---
+- hosts: localhost
+  vars_prompt:
+    - name: linux_username
+      prompt: "Linux username"
+    - name: linux_password
+      prompt: "Linux password"
+      private: yes
+  vars:
+    ansible_become_password: "{{ linux_password }}"
+  roles:
+    - wsl
+    - shell
+    - resolv
+    - apt
+    - brew
+    - krew
+    - nvm

@@ -3,4 +3,4 @@
   include_role:
     name: michaelwasher.krew
   vars:
-    krew_user: "{{ user }}"
+    krew_user: "{{ linux_username }}"

@@ -1,5 +1,0 @@
----
-workspace_dir: ~/source/repos
-workspace_repos:
-  - name: kubectl-aliases
-    url: https://github.com/Davenport-Iowa/kubectl-aliases.git

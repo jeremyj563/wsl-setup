@@ -1,9 +1,7 @@
 ---
-- name: Check if brew is already installed
-  stat:
-    path: "{{ brew_bin_path }}"
-  register: brew
-
 - name: Install brew
-  script: install-homebrew.sh
-  when: not brew.stat.exists
+  include_role:
+    name: markosamuli.linuxbrew
+  vars:
+    linuxbrew_use_installer: true
+    linuxbrew_install_checksum: sha256:bcdaa4ade908e3766c74883f829c3dbb553a9808899bf58702651bd229d0c463

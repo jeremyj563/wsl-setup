@@ -2,6 +2,3 @@
 - name: Install nvm and nodejs
   include_role:
     name: morgangraphics.ansible_role_nvm
-  vars:
-    become_user: "{{ user }}"
-    become: true

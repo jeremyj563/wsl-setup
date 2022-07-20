@@ -1,6 +1,0 @@
----
-bash_profile_scripts:
-  - history.sh
-  - brew.sh
-  - krew.sh
-  - kubectl-aliases.sh

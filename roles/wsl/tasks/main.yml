@@ -10,7 +10,7 @@
       # Ansible managed
 
       [user]
-      default=wsl
+      default = {{ linux_username }}
 
       [network]
       generateResolvConf = false

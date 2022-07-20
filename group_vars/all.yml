@@ -1,0 +1,65 @@
+---
+
+# apt
+apt_packages:
+  - apt-transport-https
+  - iputils-ping
+  - openssh-server
+  - openssh-client
+  - libkrb5-dev
+  - krb5-user
+  - gcc
+  - sudo
+  - nano
+  - vim
+  - git
+  - curl
+  - tmux
+  - unzip
+  - fzf
+
+# brew
+linuxbrew_install_tmp: "/tmp/linuxbrew"
+linuxbrew_install_url: "https://raw.githubusercontent.com/Homebrew/install/master/install.sh"
+linuxbrew_install_checksum: "sha256:bcdaa4ade908e3766c74883f829c3dbb553a9808899bf58702651bd229d0c463"
+brew_path: /home/linuxbrew/.linuxbrew/bin
+brew_bin_path: "{{ brew_path }}/brew"
+brew_packages:
+  - bat
+  - kubectl
+  - helm
+  - derailed/k9s/k9s
+  - kubeseal
+  - argocd
+  - argocd-autopilot
+  - krew
+  - nvm
+
+# krew
+krew_bin_path: "{{ brew_path }}/kubectl-krew"
+krew_plugins:
+  - "ingress-nginx"
+
+# nvm
+nvm_profile: "/home/{{ linux_username }}/.bashrc"
+nodejs_version: '16'
+
+# resolv
+resolv_nameservers:
+- '8.8.8.8'
+- '192.168.192.28'
+resolv_search:
+- 'jerlyd.com'
+
+# shell
+bash_profile_scripts:
+  - history.sh
+  - brew.sh
+  - krew.sh
+  - kubectl-aliases.sh
+
+# workspace
+workspace_dir: /home/{{ linux_username }}/source/repos
+workspace_repos:
+  - name: kubectl-aliases
+    url: https://github.com/Davenport-Iowa/kubectl-aliases.git
