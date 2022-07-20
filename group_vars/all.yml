@@ -37,6 +37,8 @@ brew_packages:
 
 # krew
 krew_bin_path: "{{ brew_path }}/kubectl-krew"
+krew_version: latest
+krew_user: "{{ linux_username }}"
 krew_plugins:
   - "ingress-nginx"
 
