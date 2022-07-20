@@ -6,7 +6,6 @@ Function that provisions and configures a development environment on an Ubuntu d
 - Downloads the Ubuntu WSL distro, installs it with wsl.exe, then uses Ansible to apply the configuration
 - Alternatively an existing distro can be configured by passing the -ExistingDistro switch
 
-
 .PARAMETER DistroName
 [string] The name of the Ubuntu distribution to provision and configure
 
@@ -35,8 +34,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 7-18-2022
-Version: 1.0.0
+Date Updated: 7-20-2022
+Version: 1.0.1
 
 .EXAMPLE
     PS > . .\Set-UbuntuConfig.ps1
@@ -45,7 +44,7 @@ Version: 1.0.0
     PS > Set-UbuntuConfig -DistroName '[distro-name]' -DistroUri '[distro-uri]'
 
 .EXAMPLE
-    PS > Set-UbuntuConfig -n [name] -u [uri]
+    PS > Set-UbuntuConfig -d [name] -u [uri]
 
 .EXAMPLE
     PS > Set-UbuntuConfig -DistroName '[distro-name]'
@@ -56,8 +55,8 @@ Version: 1.0.0
 .EXAMPLE
     PS > Set-UbuntuConfig -DistroName '[distro-name]' -ExistingDistro
 
-.EXAMPLE
-    PS > Set-UbuntuConfig -n [name] -e
+    .EXAMPLE
+    PS > Set-UbuntuConfig -d [name] -e
 #>
 
 function Set-UbuntuConfig {
@@ -69,27 +68,33 @@ function Set-UbuntuConfig {
 
         [Parameter(Mandatory=$true)]
         [Alias('c')]
-        [Management.Automation.PSCredential] $LinuxCredential,
+        [PSCredential] $LinuxCredential,
 
         [Parameter(Mandatory=$false)]
+        [Alias('u')]
         [string] $DistroUri = 'https://wsldownload.azureedge.net/Ubuntu.2020.424.0_x64.appx',
 
         [Parameter(Mandatory=$false)]
         [string] $DownloadPath = "$env:TEMP\wsl\Ubuntu.zip",
 
         [Parameter(Mandatory=$false)]
-        [string] $InstallPath = "$env:USERPROFILE\wsl\Ubuntu",
+        [Alias('p')]
+        [string] $InstallPath = "$env:USERPROFILE\wsl\$DistroName",
 
         [Parameter(Mandatory=$false)]
         [Alias('e')]
-        [switch] $ExistingDistro = $false
+        [switch] $ExistingDistro = $false,
+
+        [Parameter(Mandatory=$false)]
+        [switch] $Force = $false
     )
 
     begin {
         function Get-UbuntuArchive {
             if (Test-Path -Path $DownloadPath) {
-                Write-Host -Object "Ubuntu archive found at: $DownloadPath" -ForegroundColor Green
+                Write-Host -Object "Archive found at: $DownloadPath" -ForegroundColor Green
             } else {
+                Write-Host -Object "Downloading archive to: $DownloadPath" -ForegroundColor Yellow
                 $downloadDir = Split-Path -Path $DownloadPath -Parent
                 New-Item -Path $downloadDir -Type Directory -Force -ErrorAction SilentlyContinue
                 Invoke-WebRequest -Uri $DistroUri -OutFile $DownloadPath -UseBasicParsing -ErrorAction Stop
@@ -109,9 +114,13 @@ function Set-UbuntuConfig {
             param (
                 [object] $Archive
             )
+            Write-Host -Object "Importing archive to: $InstallPath" -ForegroundColor Yellow
             New-Item -Path $InstallPath -Type Directory -Force -ErrorAction SilentlyContinue | Out-Null
             $importFile = Expand-UbuntuArchive -Archive $Archive
             Start-Process -FilePath 'wsl.exe' -ArgumentList "--import $DistroName $InstallPath $importFile" -NoNewWindow -Wait
+        }
+        function Stop-UbuntuDistro {
+            Start-Process -FilePath wsl.exe -ArgumentList "--terminate $DistroName" -NoNewWindow -Wait
         }
         function Get-NetworkCredential() {
             $credential = $LinuxCredential.GetNetworkCredential()
@@ -122,23 +131,36 @@ function Set-UbuntuConfig {
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec bash install-ansible.sh" -NoNewWindow -Wait
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook playbook-wsl-user.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($cred.UserName)", "--exec ansible-galaxy install -r requirements.yml" -NoNewWindow -Wait
-            # Start-Process -FilePath wsl.exe -ArgumentList "--terminate $DistroName" -NoNewWindow -Wait
+            Stop-UbuntuDistro
         }
         function Start-DistroConfig {
             $cred = Get-NetworkCredential
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($cred.UserName)", "--exec ansible-playbook playbook-wsl-config.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
+            Stop-UbuntuDistro
         }
-    }
-
-    process {
-        if (-Not $ExistingDistro) {
+        function Test-ExistingDistro {
+            $distros = wsl --list
+            $result = $distros | Where-Object -FilterScript { $_ -eq "$DistroName" }
+            $exists = -not ($null -eq $result)
+            return $exists
+        }
+        function New-UbuntuDistro {
+            if ((-not $Force) -and (Test-ExistingDistro)) {
+                throw "Distro named '$DistroName' already exists! Either use -ExistingDistro or pass -Force to override."
+            }
             $archive = Get-UbuntuArchive
             Import-UbuntuDistro -Archive $archive
             Start-DistroBootstrap
         }
-        Start-DistroConfig
+    }
+
+    process {
+        if (-not $ExistingDistro) {
+            New-UbuntuDistro
+        }
     }
 
     end {
+        Start-DistroConfig
     }
 }
