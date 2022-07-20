@@ -10,11 +10,8 @@ Function that provisions and configures a development environment on an Ubuntu d
 .PARAMETER DistroName
 [string] The name of the Ubuntu distribution to provision and configure
 
-.PARAMETER LinuxUsername
-[string] The non-root username to use for configuring the development environment (default is 'wsl')
-
-.PARAMETER LinuxPassword
-[string] The password for the non-root user being used to configure the development environment
+.PARAMETER LinuxCredential
+[PSCredential] The non-root credential to use for configuring the development environment
 
 .PARAMETER DistroUri
 [string] Optional URI of the Ubuntu distribution to download and install
@@ -67,27 +64,20 @@ function Set-UbuntuConfig {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [Alias('n')]
+        [Alias('d')]
         [string] $DistroName,
 
-        [Parameter(Mandatory=$false)]
-        [Alias('u')]
-        [string] $LinuxUsername = 'wsl',
-
         [Parameter(Mandatory=$true)]
-        [Alias('p')]
-        [string] $LinuxPassword,
+        [Alias('c')]
+        [Management.Automation.PSCredential] $LinuxCredential,
 
         [Parameter(Mandatory=$false)]
-        [Alias('u')]
         [string] $DistroUri = 'https://wsldownload.azureedge.net/Ubuntu.2020.424.0_x64.appx',
 
         [Parameter(Mandatory=$false)]
-        [Alias('d')]
         [string] $DownloadPath = "$env:TEMP\wsl\Ubuntu.zip",
 
         [Parameter(Mandatory=$false)]
-        [Alias('p')]
         [string] $InstallPath = "$env:USERPROFILE\wsl\Ubuntu",
 
         [Parameter(Mandatory=$false)]
@@ -121,16 +111,22 @@ function Set-UbuntuConfig {
             )
             New-Item -Path $InstallPath -Type Directory -Force -ErrorAction SilentlyContinue | Out-Null
             $importFile = Expand-UbuntuArchive -Archive $Archive
-            Start-Process -FilePath 'wsl.exe' -ArgumentList "--import $DistroName $InstallPath $importFile"
+            Start-Process -FilePath 'wsl.exe' -ArgumentList "--import $DistroName $InstallPath $importFile" -NoNewWindow -Wait
+        }
+        function Get-NetworkCredential() {
+            $credential = $LinuxCredential.GetNetworkCredential()
+            return $credential
         }
         function Start-DistroBootstrap {
+            $cred = Get-NetworkCredential
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec bash install-ansible.sh" -NoNewWindow -Wait
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook playbook-wsl-user.yml -e ""linux_username=$LinuxUsername linux_password=$LinuxPassword""" -NoNewWindow -Wait
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $LinuxUsername", "--exec ansible-galaxy install -r requirements.yml" -NoNewWindow -Wait
-            Start-Process -FilePath wsl.exe -ArgumentList "--terminate $DistroName" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook playbook-wsl-user.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($cred.UserName)", "--exec ansible-galaxy install -r requirements.yml" -NoNewWindow -Wait
+            # Start-Process -FilePath wsl.exe -ArgumentList "--terminate $DistroName" -NoNewWindow -Wait
         }
         function Start-DistroConfig {
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $LinuxUser", "--exec ansible-playbook playbook-wsl-config.yml -e ""linux_username=$LinuxUsername linux_password=$LinuxPassword""" -NoNewWindow -Wait
+            $cred = Get-NetworkCredential
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($cred.UserName)", "--exec ansible-playbook playbook-wsl-config.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
         }
     }
 
