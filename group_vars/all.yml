@@ -1,5 +1,4 @@
 ---
-
 # apt
 apt_packages:
   - apt-transport-https
@@ -48,7 +47,7 @@ nodejs_version: '16'
 
 # resolv
 resolv_nameservers:
-- '8.8.8.8'
+- '192.168.192.27'
 - '192.168.192.28'
 resolv_search:
 - 'jerlyd.com'
