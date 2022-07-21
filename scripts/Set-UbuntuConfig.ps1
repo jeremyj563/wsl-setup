@@ -7,28 +7,28 @@ Function that provisions and configures a development environment on an Ubuntu d
 - Alternatively an existing distro can be configured by passing the -ExistingDistro switch
 
 .PARAMETER DistroName
-[string] The name of the Ubuntu distribution to provision and configure
+[string] The name of the distribution to provision and configure
 
 .PARAMETER LinuxCredential
-[PSCredential] The non-root credential to use for configuring the development environment
+[PSCredential] The non-root credential to create and use for configuring the user environment
 
 .PARAMETER DistroUri
-[string] Optional URI of the Ubuntu distribution to download and install
+[string] Optional URI of the distribution archive to download and install
 
 .PARAMETER DistroSha
-[string] Optional SHA256 hash of the Ubuntu distribution to install
+[string] Optional SHA256 hash of the distribution archive to install
 
 .PARAMETER DownloadPath
-[string] Optional path of where to download the Ubuntu distribution
+[string] Optional path of where to download the distribution archive to
 
 .PARAMETER InstallPath
-[string] Optional path of where to store the Ubuntu Hyper-V hard disk files
+[string] Optional path of where to store the distribution's Hyper-V hard disk files
 
 .PARAMETER ExistingDistro
-[switch] Optionally configure an already provisioned Ubuntu distribution matching DistroName
+[switch] Pass this switch to configure an already existing distribution (must match DistroName)
 
 .PARAMETER ForceBootstrap
-[switch] Passing this switch will run the bootstrap process on an already existing distribution
+[switch] Pass this switch to run the bootstrap process on an already provisioned distribution
 
 .INPUTS
 None. You cannot pipe objects to Set-UbuntuConfig
@@ -40,8 +40,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 7-20-2022
-Version: 1.0.1
+Date Updated: 7-21-2022
+Version: 1.0.2
 
 .EXAMPLE
     PS > . .\Set-UbuntuConfig.ps1
