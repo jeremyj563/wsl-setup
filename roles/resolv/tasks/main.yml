@@ -3,7 +3,6 @@
   file:
     path: /etc/resolv.conf
     state: absent
-  become: true
 
 - name: Configure /etc/resplv.conf
   copy:
@@ -19,4 +18,3 @@
       nameserver {{ resolv_nameserver_primary }}
       nameserver {{ resolv_nameserver_secondary }}
       search {{ resolv_search }}
-  become: true

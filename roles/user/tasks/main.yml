@@ -16,4 +16,3 @@
       - video
       - plugdev
       - netdev
-  become: true
