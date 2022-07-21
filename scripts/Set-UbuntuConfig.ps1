@@ -27,6 +27,9 @@ Function that provisions and configures a development environment on an Ubuntu d
 .PARAMETER ExistingDistro
 [switch] Optionally configure an already provisioned Ubuntu distribution matching DistroName
 
+.PARAMETER ForceBootstrap
+[switch] Passing this switch will run the bootstrap process on an already existing distribution
+
 .INPUTS
 None. You cannot pipe objects to Set-UbuntuConfig
 
@@ -93,7 +96,7 @@ function Set-UbuntuConfig {
         [switch] $ExistingDistro = $false,
 
         [Parameter(Mandatory=$false)]
-        [switch] $Force = $false
+        [switch] $ForceBootstrap = $false
     )
 
     begin {
@@ -167,8 +170,8 @@ function Set-UbuntuConfig {
             return $exists
         }
         function New-UbuntuDistro {
-            if ((-not $Force) -and (Test-ExistingDistro)) {
-                throw "Distro named '$DistroName' already exists! Either use -ExistingDistro or pass -Force to override."
+            if ((-not $ForceBootstrap) -and (Test-ExistingDistro)) {
+                throw "Distro named '$DistroName' already exists! Either use -ExistingDistro or pass -ForceBootstrap to override."
             }
             $archiveName = Split-Path $DownloadPath -Leaf
             $archive = Get-UbuntuArchive | Where-Object -Property Name -EQ $archiveName
