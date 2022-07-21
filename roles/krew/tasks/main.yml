@@ -1,4 +1,4 @@
----
+--- # modified from https://github.com/MichaelWasher/ansible-role-krew
 - name: Check `kubectl-krew` is present
   changed_when: false
   ignore_errors: true
