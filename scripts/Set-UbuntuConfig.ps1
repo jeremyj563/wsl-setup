@@ -121,15 +121,15 @@ function Set-UbuntuConfig {
                 New-Item -Path $downloadDir -Type Directory -Force -ErrorAction SilentlyContinue
                 Invoke-WebRequest -Uri $DistroUri -OutFile $DownloadPath -UseBasicParsing -ErrorAction Stop
             }
-            $archive = Get-ChildItem -Path $DownloadPath
+            $archive = Get-Item -LiteralPath $DownloadPath
             return $archive
         }
         function Expand-UbuntuArchive {
             param (
                 [object] $Archive
             )
-            Expand-Archive -Path $Archive -DestinationPath $Archive.DirectoryName -Force -ErrorAction Stop
-            $importFile = Join-Path -Path $Archive.DirectoryName -ChildPath 'install.tar.gz'
+            Expand-Archive -Path $Archive -DestinationPath $Archive.Directory -Force -ErrorAction Stop
+            $importFile = Join-Path -Path $Archive.Directory -ChildPath 'install.tar.gz'
             return $importFile
         }
         function Import-UbuntuDistro {
@@ -170,7 +170,8 @@ function Set-UbuntuConfig {
             if ((-not $Force) -and (Test-ExistingDistro)) {
                 throw "Distro named '$DistroName' already exists! Either use -ExistingDistro or pass -Force to override."
             }
-            $archive = Get-UbuntuArchive
+            $archiveName = Split-Path $DownloadPath -Leaf
+            $archive = Get-UbuntuArchive | Where-Object -Property Name -EQ $archiveName
             Import-UbuntuDistro -Archive $archive
             Start-DistroBootstrap
         }
