@@ -25,7 +25,6 @@ brew_path: /home/linuxbrew/.linuxbrew/bin
 brew_bin_path: "{{ brew_path }}/brew"
 brew_packages:
   - bat
-  - tldr
   - kubectl
   - helm
   - derailed/k9s/k9s
