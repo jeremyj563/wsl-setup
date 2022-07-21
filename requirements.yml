@@ -1,9 +1,5 @@
 ---
 - src: morgangraphics.ansible_role_nvm # https://github.com/morgangraphics/ansible-role-nvm
   version: v1.4.3
-- src: michaelwasher.krew # https://github.com/MichaelWasher/ansible-role-krew
-  version: master
-- src: ahuffman.resolv # https://github.com/ahuffman/ansible-resolv
-  version: 1.3.2
 - src: markosamuli.linuxbrew # https://github.com/markosamuli/ansible-linuxbrew
   version: v1.2.2

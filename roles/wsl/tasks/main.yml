@@ -1,10 +1,10 @@
 ---
-- name: Create config file /etc/wsl.conf
+- name: Configure /etc/wsl.conf
   copy:
+    dest: /etc/wsl.conf
     owner: root
     group: root
     mode: '0644'
-    dest: /etc/wsl.conf
     content:
       |
       # Ansible managed

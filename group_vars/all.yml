@@ -46,11 +46,9 @@ nvm_profile: "/home/{{ linux_username }}/.bashrc"
 nodejs_version: '16'
 
 # resolv
-resolv_nameservers:
-- '192.168.192.27'
-- '192.168.192.28'
-resolv_search:
-- 'jerlyd.com'
+resolv_nameserver_primary: '192.168.192.27'
+resolv_nameserver_secondary: '192.168.192.28'
+resolv_search: 'jerlyd.com'
 
 # shell
 bash_profile_scripts:

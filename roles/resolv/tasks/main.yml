@@ -1,15 +1,22 @@
 ---
-- name: Create /etc/resolv.conf
+- name: Unlink /etc/resolv.conf
   file:
     path: /etc/resolv.conf
-    state: touch
+    state: absent
+  become: true
+
+- name: Configure /etc/resplv.conf
+  copy:
+    dest: /etc/resolv.conf
     owner: root
     group: root
     mode: '0644'
+    attr: +i
+    content:
+      |
+      # Ansible managed
+      
+      nameserver {{ resolv_nameserver_primary }}
+      nameserver {{ resolv_nameserver_secondary }}
+      search {{ resolv_search }}
   become: true
-
-- name: Configure /etc/resolv.conf
-  include_role:
-    name: ahuffman.resolv
-  vars:
-    become: true

@@ -15,9 +15,7 @@
   vars:
     ansible_become_password: "{{ linux_password }}"
   roles:
-    - wsl
     - shell
-    - resolv
     - apt
     - brew
     - krew

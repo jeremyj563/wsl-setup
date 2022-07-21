@@ -151,12 +151,12 @@ function Set-UbuntuConfig {
         function Start-DistroBootstrap {
             $cred = Get-NetworkCredential
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec bash install-ansible.sh" -NoNewWindow -Wait
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook playbook-wsl-user.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($cred.UserName)", "--exec ansible-galaxy install -r requirements.yml" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook playbook-wsl-bootstrap.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
         function Start-DistroConfig {
             $cred = Get-NetworkCredential
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($cred.UserName)", "--exec ansible-galaxy install -r requirements.yml" -NoNewWindow -Wait
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($cred.UserName)", "--exec ansible-playbook playbook-wsl-config.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
