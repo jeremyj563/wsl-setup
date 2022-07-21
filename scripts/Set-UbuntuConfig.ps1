@@ -15,6 +15,9 @@ Function that provisions and configures a development environment on an Ubuntu d
 .PARAMETER DistroUri
 [string] Optional URI of the Ubuntu distribution to download and install
 
+.PARAMETER DistroSha
+[string] Optional SHA256 hash of the Ubuntu distribution to install
+
 .PARAMETER DownloadPath
 [string] Optional path of where to download the Ubuntu distribution
 
@@ -75,6 +78,10 @@ function Set-UbuntuConfig {
         [string] $DistroUri = 'https://wsldownload.azureedge.net/Ubuntu.2020.424.0_x64.appx',
 
         [Parameter(Mandatory=$false)]
+        [Alias('s')]
+        [string] $DistroSha = '5FBD489AC156279E0D6E3448E0070C3E3DDF3A062E14E60CAAA2C68BE78E0130',
+
+        [Parameter(Mandatory=$false)]
         [string] $DownloadPath = "$env:TEMP\wsl\Ubuntu.zip",
 
         [Parameter(Mandatory=$false)]
@@ -90,11 +97,26 @@ function Set-UbuntuConfig {
     )
 
     begin {
-        function Get-UbuntuArchive {
+        function Test-DistroSha {
+            $fileHash = Get-FileHash -Path $DownloadPath -Algorithm SHA256
+            $sha = $fileHash.Hash
+            if (-not ($sha -eq $DistroSha)) {
+                Write-Warning -Message "Distro SHA mismatch.`nExpected: $DistroSha`nGot: $sha`n"
+                return $false
+            }
+            return $true
+        }
+        function Test-UbuntuArchive {
             if (Test-Path -Path $DownloadPath) {
-                Write-Host -Object "Archive found at: $DownloadPath" -ForegroundColor Green
-            } else {
-                Write-Host -Object "Downloading archive to: $DownloadPath" -ForegroundColor Yellow
+                Write-Host -Object "Archive found at: $DownloadPath`n" -ForegroundColor Green
+                $validSha = Test-DistroSha
+                return $validSha
+            }
+            return $false
+        }
+        function Get-UbuntuArchive {
+            if (-not (Test-UbuntuArchive)) {
+                Write-Host -Object "Downloading archive to: $DownloadPath`n" -ForegroundColor Yellow
                 $downloadDir = Split-Path -Path $DownloadPath -Parent
                 New-Item -Path $downloadDir -Type Directory -Force -ErrorAction SilentlyContinue
                 Invoke-WebRequest -Uri $DistroUri -OutFile $DownloadPath -UseBasicParsing -ErrorAction Stop
@@ -114,7 +136,7 @@ function Set-UbuntuConfig {
             param (
                 [object] $Archive
             )
-            Write-Host -Object "Importing archive to: $InstallPath" -ForegroundColor Yellow
+            Write-Host -Object "Importing archive to: $InstallPath`n" -ForegroundColor Yellow
             New-Item -Path $InstallPath -Type Directory -Force -ErrorAction SilentlyContinue | Out-Null
             $importFile = Expand-UbuntuArchive -Archive $Archive
             Start-Process -FilePath 'wsl.exe' -ArgumentList "--import $DistroName $InstallPath $importFile" -NoNewWindow -Wait
