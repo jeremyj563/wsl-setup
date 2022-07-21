@@ -1,7 +1,7 @@
 # WSL Setup
 
 ## Synopsis
-Ansible config for setting up an Ubuntu development environment in WSL
+Ansible config for setting up Ubuntu development environments in WSL
 
 ## Provision a New Distribution
 
