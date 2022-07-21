@@ -7,7 +7,7 @@ Ansible config for setting up an Ubuntu development environment in WSL
 
 ### Clone this repo and configure **group_vars/all.yml**
 ```
-PS > git clone https://github.com/jeremyj563/wsl-setup.git .\wsl-setup && cd $_
+PS > git clone https://github.com/jeremyj563/wsl-setup.git && cd wsl_setup
 ```
 
 ### Run the PowerShell function
