@@ -19,5 +19,6 @@
     - brew
     - krew
     - nvm
+    - pip
     - shell
     - workspace

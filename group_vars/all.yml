@@ -3,6 +3,7 @@
 apt_packages:
   - apt-transport-https
   - iputils-ping
+  - python3-pip
   - openssh-server
   - openssh-client
   - libkrb5-dev
@@ -45,10 +46,14 @@ krew_plugins:
 nvm_profile: "/home/{{ linux_username }}/.bashrc"
 nodejs_version: '16'
 
+# pip
+pip_packages:
+  - pykerberos
+
 # resolv
-resolv_nameserver_primary: '192.168.192.27'
-resolv_nameserver_secondary: '192.168.192.28'
-resolv_search: 'jerlyd.com'
+resolv_nameserver_primary: '10.1.0.10'
+resolv_nameserver_secondary: '173.16.48.4'
+resolv_search: 'citrix-dch.local'
 
 # shell
 bash_profile_scripts:
