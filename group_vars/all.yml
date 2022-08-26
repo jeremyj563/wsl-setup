@@ -49,6 +49,7 @@ nodejs_version: '16'
 # pip
 pip_packages:
   - pykerberos==1.2.4
+  - pyvmomi==7.0.3
 
 # resolv
 resolv_nameserver_primary: '10.1.0.10'
