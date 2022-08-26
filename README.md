@@ -1,7 +1,7 @@
 # WSL Setup
 
 ## Synopsis
-Ansible config for setting up Ubuntu development environments in WSL
+Ansible + PowerShell config for setting up Ubuntu development environments in WSL
 
 ## Instructions
 
