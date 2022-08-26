@@ -3,7 +3,7 @@
 ## Synopsis
 Ansible config for setting up Ubuntu development environments in WSL
 
-## Provision a New Distribution
+## Instructions
 
 ### Clone this repo and configure **group_vars/all.yml**
 ```
