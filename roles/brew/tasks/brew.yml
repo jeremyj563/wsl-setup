@@ -2,6 +2,3 @@
 - name: Install brew
   include_role:
     name: markosamuli.linuxbrew
-  vars:
-    linuxbrew_use_installer: true
-    linuxbrew_install_checksum: sha256:49228c160ff6a4f81ea8a33c6c19cc126c5c3f17864b607c9fe85ed172f75c33
