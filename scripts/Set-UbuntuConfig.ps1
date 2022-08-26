@@ -44,7 +44,7 @@ Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
 Date Updated: 8-26-2022
-Version: 1.0.3
+Version: 1.0.4
 
 .EXAMPLE
     PS > . .\Set-UbuntuConfig.ps1
@@ -170,9 +170,8 @@ function Set-UbuntuConfig {
             Stop-UbuntuDistro
         }
         function Test-ExistingDistro {
-            $distros = wsl --list
-            $result = $distros | Where-Object -FilterScript { $_ -eq "$DistroName" }
-            $exists = -not ($null -eq $result)
+            $distros = wsl.exe --list
+            $exists = $DistroName -in $distros
             return $exists
         }
         function New-UbuntuDistro {
