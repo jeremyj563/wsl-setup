@@ -12,7 +12,7 @@ Ansible config for setting up Ubuntu development environments in WSL
 
 ### Configure **group_vars\all.yml**
 ```
-wsl-setup> notepad .\group_vars\all.yml
+wsl-setup> code .\group_vars\all.yml
 ```
 
 ### Run the PowerShell function
