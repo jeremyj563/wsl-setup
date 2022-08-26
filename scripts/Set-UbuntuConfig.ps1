@@ -25,10 +25,13 @@ Function that provisions and configures a development environment on an Ubuntu d
 [string] Optional path of where to store the distribution's Hyper-V hard disk files
 
 .PARAMETER ExistingDistro
-[switch] Pass this switch to configure an already existing distribution (must match DistroName)
+[switch] Configure an already existing distribution (must match DistroName)
 
 .PARAMETER ForceBootstrap
-[switch] Pass this switch to run the bootstrap process on an already provisioned distribution
+[switch] Run the bootstrap process on an already provisioned distribution
+
+.PARAMETER SetDefault
+[switch] Set the distribution as default once configured
 
 .INPUTS
 None. You cannot pipe objects to Set-UbuntuConfig
@@ -40,8 +43,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 7-21-2022
-Version: 1.0.2
+Date Updated: 8-26-2022
+Version: 1.0.3
 
 .EXAMPLE
     PS > . .\Set-UbuntuConfig.ps1
@@ -96,7 +99,10 @@ function Set-UbuntuConfig {
         [switch] $ExistingDistro = $false,
 
         [Parameter(Mandatory=$false)]
-        [switch] $ForceBootstrap = $false
+        [switch] $ForceBootstrap = $false,
+
+        [Parameter(Mandatory=$false)]
+        [switch] $SetDefault
     )
 
     begin {
@@ -153,7 +159,7 @@ function Set-UbuntuConfig {
         }
         function Start-DistroBootstrap {
             $cred = Get-NetworkCredential
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec bash install-ansible.sh" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec bash ./scripts/install-ansible.sh" -NoNewWindow -Wait
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook playbook-wsl-bootstrap.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
@@ -178,15 +184,22 @@ function Set-UbuntuConfig {
             Import-UbuntuDistro -Archive $archive
             Start-DistroBootstrap
         }
+        function Set-DefaultDistro {
+            Write-Host -Object "Setting distro '$DistroName' as default`n" -ForegroundColor Yellow
+            Start-Process -FilePath wsl.exe -ArgumentList "--set-default $DistroName" -NoNewWindow -Wait
+        }
     }
 
     process {
         if (-not $ExistingDistro) {
             New-UbuntuDistro
         }
+        Start-DistroConfig
     }
 
     end {
-        Start-DistroConfig
+        if ($SetDefault) {
+            Set-DefaultDistro
+        }
     }
 }
