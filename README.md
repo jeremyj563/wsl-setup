@@ -15,7 +15,7 @@ Ansible config for setting up Ubuntu development environments in WSL
 wsl-setup> code .\group_vars\all.yml
 ```
 
-### Run the PowerShell function
+### Run the `Set-UbuntuConfig` PowerShell function
 ```
 PS wsl-setup> . .\scripts\Set-UbuntuConfig.ps1
 PS wsl-setup> Set-UbuntuConfig -DistroName <distro-name> [-ExistingDistro] [-SetDefault]
