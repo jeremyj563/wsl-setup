@@ -2,6 +2,7 @@
 # apt
 apt_packages:
   - apt-transport-https
+  - bash-completion
   - iputils-ping
   - python3-pip
   - openssh-server
@@ -60,6 +61,7 @@ bash_profile_scripts:
   - brew.sh
   - krew.sh
   - kubectl-aliases.sh
+  - kubectl-completion.sh
 
 # workspace
 workspace_dir: /home/{{ linux_username }}/source/repos
