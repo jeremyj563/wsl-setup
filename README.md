@@ -10,7 +10,7 @@ Ansible config for setting up Ubuntu development environments in WSL
 > git clone https://github.com/jeremyj563/wsl-setup.git && cd wsl-setup
 ```
 
-### Configure **group_vars\all.yml**
+### Configure `group_vars\all.yml`
 ```
 wsl-setup> code .\group_vars\all.yml
 ```
