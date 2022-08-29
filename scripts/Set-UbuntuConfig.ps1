@@ -25,7 +25,7 @@ Function that provisions and configures a development environment on an Ubuntu d
 [string] Optional path of where to store the distribution's Hyper-V hard disk files
 
 .PARAMETER ExistingDistro
-[switch] Configure an already existing distribution (must match DistroName)
+[switch] Configure an already existing distribution (matched on DistroName)
 
 .PARAMETER ForceBootstrap
 [switch] Run the bootstrap process on an already provisioned distribution
