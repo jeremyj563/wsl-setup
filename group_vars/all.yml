@@ -65,7 +65,7 @@ bash_profile_scripts:
   - kubectl-completion.sh
 
 # workspace
-workspace_dir: /home/{{ linux_username }}/source/repos
+workspace_repos_dir: /home/{{ linux_username }}/source/repos
 workspace_repos:
   - name: kubectl-aliases
     url: https://github.com/Davenport-Iowa/kubectl-aliases.git

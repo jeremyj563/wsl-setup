@@ -1,7 +1,7 @@
 ---
-- name: Create workspace directory {{ workspace_dir }}
+- name: Create workspace repositories directory {{ workspace_repos_dir }}
   file:
-    path: "{{ workspace_dir }}"
+    path: "{{ workspace_repos_dir }}"
     state: directory
     owner: "{{ linux_username }}"
     group: "{{ linux_username }}"
@@ -10,7 +10,7 @@
 - name: Clone workspace git repos
   git:
     repo: "{{ repo.url }}"
-    dest: "{{ workspace_dir }}/{{ repo.name }}"
+    dest: "{{ workspace_repos_dir }}/{{ repo.name }}"
   with_items: "{{ workspace_repos }}"
   loop_control:
     loop_var: repo
