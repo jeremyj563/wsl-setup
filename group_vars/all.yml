@@ -63,6 +63,7 @@ bash_profile_scripts:
   - krew.sh
   - kubectl-aliases.sh
   - kubectl-completion.sh
+  - ssh.sh
 
 # workspace
 workspace_repos_dir: /home/{{ linux_username }}/source/repos
