@@ -15,7 +15,7 @@ PS > git clone https://github.com/jeremyj563/wsl-setup.git && cd wsl-setup
 PS wsl-setup> code .\group_vars\all.yml
 ```
 
-### Add `Set-UbuntuConfig` cmdlet function to your PowerShell profile (optional)
+### Add `Set-UbuntuConfig` cmdlet function to your PowerShell profile (recommended)
 ```
 PS wsl-setup> . .\scripts\Set-ProfileScript.ps1
 ```
