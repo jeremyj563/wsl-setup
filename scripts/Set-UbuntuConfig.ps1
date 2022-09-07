@@ -3,20 +3,20 @@
 Function that provisions and configures a development environment on an Ubuntu distribution running in WSL
     
 .DESCRIPTION 
-- Downloads the Ubuntu WSL distro, installs it with wsl.exe, then uses Ansible to apply the configuration
-- Alternatively an existing distro can be configured by passing the -ExistingDistro switch
-
-.PARAMETER DistroName
-[string] The name of the distribution to provision and configure
+- Configures an existing Ubuntu WSL distribution using wsl.exe, then uses Ansible to apply the configuration
+- Pass the -NewDistro switch to provision and configure a new Ubuntu distribution from scratch
 
 .PARAMETER LinuxCredential
 [PSCredential] The non-root credential to create and use for configuring the user environment
 
+.PARAMETER DistroName
+[string] Optional name of the distribution to provision and configure (default: Ubuntu-K8s)
+
 .PARAMETER DistroUri
-[string] Optional URI of the distribution archive to download and install
+[string] Optional URI of the distribution archive to download and provision
 
 .PARAMETER DistroSha
-[string] Optional SHA256 hash of the distribution archive to install
+[string] Optional SHA256 hash of the distribution archive to provision
 
 .PARAMETER DownloadPath
 [string] Optional path of where to download the distribution archive to
@@ -24,7 +24,7 @@ Function that provisions and configures a development environment on an Ubuntu d
 .PARAMETER InstallPath
 [string] Optional path of where to store the distribution's Hyper-V hard disk files
 
-.PARAMETER ExistingDistro
+.PARAMETER NewDistro
 [switch] Configure an already existing distribution (matched on DistroName)
 
 .PARAMETER ForceBootstrap
@@ -43,8 +43,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 8-26-2022
-Version: 1.0.4
+Date Updated: 9-7-2022
+Version: 1.1.0
 
 .EXAMPLE
     PS > . .\Set-UbuntuConfig.ps1
@@ -62,22 +62,22 @@ Version: 1.0.4
     PS > Set-UbuntuConfig -d [name]
 
 .EXAMPLE
-    PS > Set-UbuntuConfig -DistroName '[distro-name]' -ExistingDistro
+    PS > Set-UbuntuConfig -DistroName '[distro-name]' -NewDistro
 
     .EXAMPLE
-    PS > Set-UbuntuConfig -d [name] -e
+    PS > Set-UbuntuConfig -d [name] -n
 #>
 
 function Set-UbuntuConfig {
     [CmdletBinding()]
     param (
         [Parameter(Mandatory=$true)]
-        [Alias('d')]
-        [string] $DistroName,
-
-        [Parameter(Mandatory=$true)]
         [Alias('c')]
         [PSCredential] $LinuxCredential,
+
+        [Parameter(Mandatory=$false)]
+        [Alias('d')]
+        [string] $DistroName = 'Ubuntu-K8s',
 
         [Parameter(Mandatory=$false)]
         [Alias('u')]
@@ -95,17 +95,29 @@ function Set-UbuntuConfig {
         [string] $InstallPath = "$env:USERPROFILE\wsl\$DistroName",
 
         [Parameter(Mandatory=$false)]
-        [Alias('e')]
-        [switch] $ExistingDistro = $false,
+        [Alias('n')]
+        [switch] $NewDistro = $false,
 
         [Parameter(Mandatory=$false)]
         [switch] $ForceBootstrap = $false,
 
         [Parameter(Mandatory=$false)]
-        [switch] $SetDefault
+        [switch] $SetDefault = $false
     )
 
     begin {
+        function Set-ScriptVars {
+            $script:cred = Get-NetworkCredential
+            $script:root = Get-WSLScriptRoot
+        }
+        function Get-NetworkCredential() {
+            $credential = $LinuxCredential.GetNetworkCredential()
+            return $credential
+        }
+        function Get-WSLScriptRoot() {
+            $scriptRoot = wsl.exe -d $DistroName -u root -e wslpath $PSScriptRoot
+            return $scriptRoot
+        }
         function Test-DistroSha {
             $fileHash = Get-FileHash -Path $DownloadPath -Algorithm SHA256
             $sha = $fileHash.Hash
@@ -153,20 +165,14 @@ function Set-UbuntuConfig {
         function Stop-UbuntuDistro {
             Start-Process -FilePath wsl.exe -ArgumentList "--terminate $DistroName" -NoNewWindow -Wait
         }
-        function Get-NetworkCredential() {
-            $credential = $LinuxCredential.GetNetworkCredential()
-            return $credential
-        }
         function Start-DistroBootstrap {
-            $cred = Get-NetworkCredential
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec bash ./scripts/install-ansible.sh" -NoNewWindow -Wait
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook playbook-wsl-bootstrap.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ""$script:root/install-ansible.sh""" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook ""$script:root/../playbook-wsl-bootstrap.yml"" -e ""linux_username=$($script:cred.UserName) linux_password=$($script:cred.Password)""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
         function Start-DistroConfig {
-            $cred = Get-NetworkCredential
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($cred.UserName)", "--exec ansible-galaxy install -r requirements.yml" -NoNewWindow -Wait
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($cred.UserName)", "--exec ansible-playbook playbook-wsl-config.yml -e ""linux_username=$($cred.UserName) linux_password=$($cred.Password)""" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-galaxy install -r ""$script:root/../requirements.yml""" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-playbook ""$script:root/../playbook-wsl-config.yml"" -e ""linux_username=$($script:cred.UserName) linux_password=$($script:cred.Password)""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
         function Test-ExistingDistro {
@@ -176,7 +182,7 @@ function Set-UbuntuConfig {
         }
         function New-UbuntuDistro {
             if ((-not $ForceBootstrap) -and (Test-ExistingDistro)) {
-                throw "Distro named '$DistroName' already exists! Either use -ExistingDistro or pass -ForceBootstrap to override."
+                throw "Distro named '$DistroName' already exists! Pass the -ForceBootstrap switch to override."
             }
             $archiveName = Split-Path $DownloadPath -Leaf
             $archive = Get-UbuntuArchive | Where-Object -Property Name -EQ $archiveName
@@ -190,7 +196,8 @@ function Set-UbuntuConfig {
     }
 
     process {
-        if (-not $ExistingDistro) {
+        Set-ScriptVars
+        if ($NewDistro) {
             New-UbuntuDistro
         }
         Start-DistroConfig
