@@ -15,12 +15,12 @@ PS > git clone https://github.com/jeremyj563/wsl-setup.git && cd wsl-setup
 PS wsl-setup> code .\group_vars\all.yml
 ```
 
-### Add the `Set-UbuntuConfig` Cmdlet function to your PowerShell Profile script
+### Add `Set-UbuntuConfig` cmdlet function to your PowerShell profile (optional)
 ```
 PS wsl-setup> . .\scripts\Set-ProfileScript.ps1
 ```
 
-### Run the `Set-UbuntuConfig` function from any location
+### Run `Set-UbuntuConfig` (can be ran from anywhere if dot sourced as in previous step)
 ```
 PS > Set-UbuntuConfig -DistroName <distro-name> [-NewDistro] [-SetDefault]
 ```
