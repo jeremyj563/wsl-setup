@@ -20,7 +20,7 @@ PS wsl-setup> code .\group_vars\all.yml
 PS wsl-setup> . .\scripts\Set-ProfileScript.ps1
 ```
 
-### Run the `Set-UbuntuConfig` function
+### Run the `Set-UbuntuConfig` function from any location
 ```
-PS wsl-setup> Set-UbuntuConfig -DistroName <distro-name> [-NewDistro] [-SetDefault]
+PS > Set-UbuntuConfig -DistroName <distro-name> [-NewDistro] [-SetDefault]
 ```
