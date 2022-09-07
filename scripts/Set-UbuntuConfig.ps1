@@ -44,7 +44,7 @@ Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
 Date Updated: 9-7-2022
-Version: 1.1.0
+Version: 1.1.1
 
 .EXAMPLE
     PS > . .\Set-UbuntuConfig.ps1
@@ -107,16 +107,8 @@ function Set-UbuntuConfig {
 
     begin {
         function Set-ScriptVars {
-            $script:cred = Get-NetworkCredential
-            $script:root = Get-WSLScriptRoot
-        }
-        function Get-NetworkCredential() {
-            $credential = $LinuxCredential.GetNetworkCredential()
-            return $credential
-        }
-        function Get-WSLScriptRoot() {
-            $scriptRoot = wsl.exe -d $DistroName -u root -e wslpath $PSScriptRoot
-            return $scriptRoot
+            $script:cred = $LinuxCredential.GetNetworkCredential()
+            $script:root = wsl.exe -d $DistroName -u root -e wslpath $PSScriptRoot
         }
         function Test-DistroSha {
             $fileHash = Get-FileHash -Path $DownloadPath -Algorithm SHA256
