@@ -17,7 +17,7 @@ PS wsl-setup> code .\group_vars\all.yml
 
 ### Add the `Set-UbuntuConfig` Cmdlet function to your PowerShell Profile script
 ```
-PS wsl-setup> .\scripts\Set-ProfileScript.ps1
+PS wsl-setup> . .\scripts\Set-ProfileScript.ps1
 ```
 
 ### Run the `Set-UbuntuConfig` function
