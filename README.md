@@ -3,7 +3,7 @@
 ## Synopsis
 Ansible + PowerShell config for setting up Ubuntu development environments in WSL
 
-## Initial Setup
+## Initial Setup (first run only)
 
 ### Clone this repo
 ```
@@ -20,7 +20,7 @@ PS wsl-setup> code .\group_vars\all.yml
 PS wsl-setup> . .\scripts\Set-ProfileScript.ps1
 ```
 
-### Usage
+## Usage
 
 ### Run `Set-UbuntuConfig` (can be ran from anywhere if dot sourced as in previous step)
 ```
