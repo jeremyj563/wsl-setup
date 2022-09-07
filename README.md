@@ -7,16 +7,20 @@ Ansible + PowerShell config for setting up Ubuntu development environments in WS
 
 ### Clone this repo
 ```
-> git clone https://github.com/jeremyj563/wsl-setup.git && cd wsl-setup
+PS > git clone https://github.com/jeremyj563/wsl-setup.git && cd wsl-setup
 ```
 
 ### Configure `group_vars\all.yml`
 ```
-wsl-setup> code .\group_vars\all.yml
+PS wsl-setup> code .\group_vars\all.yml
 ```
 
-### Run the `Set-UbuntuConfig` PowerShell function
+### Add the `Set-UbuntuConfig` Cmdlet function to your PowerShell Profile script
 ```
-PS wsl-setup> . .\scripts\Set-UbuntuConfig.ps1
+PS wsl-setup> .\scripts\Set-ProfileScript.ps1
+```
+
+### Run the `Set-UbuntuConfig` function
+```
 PS wsl-setup> Set-UbuntuConfig -DistroName <distro-name> [-NewDistro] [-SetDefault]
 ```
