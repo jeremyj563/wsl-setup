@@ -22,7 +22,9 @@ PS wsl-setup> . .\scripts\Set-ProfileScript.ps1
 
 ## Usage
 
-### Run `Set-UbuntuConfig` (can be ran from anywhere if dot sourced as in previous step)
-```
+### Run `Set-UbuntuConfig`
+```ps1
+# Note: This command can be ran from anywhere if dot sourced as shown in initial setup
+
 PS > Set-UbuntuConfig -DistroName <distro-name> [-NewDistro] [-SetDefault]
 ```
