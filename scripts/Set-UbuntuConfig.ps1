@@ -44,7 +44,7 @@ Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
 Date Updated: 9-7-2022
-Version: 1.1.1
+Version: 1.1.2
 
 .EXAMPLE
     PS > . .\Set-UbuntuConfig.ps1
@@ -109,6 +109,9 @@ function Set-UbuntuConfig {
         function Set-ScriptVars {
             $script:cred = $LinuxCredential.GetNetworkCredential()
             $script:root = wsl.exe -d $DistroName -u root -e wslpath $PSScriptRoot
+            if (-not $?) {
+                throw "Exit code: $LASTEXITCODE`n$script:root"
+            }
         }
         function Test-DistroSha {
             $fileHash = Get-FileHash -Path $DownloadPath -Algorithm SHA256
@@ -158,11 +161,13 @@ function Set-UbuntuConfig {
             Start-Process -FilePath wsl.exe -ArgumentList "--terminate $DistroName" -NoNewWindow -Wait
         }
         function Start-DistroBootstrap {
+            Set-ScriptVars
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ""$script:root/install-ansible.sh""" -NoNewWindow -Wait
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook ""$script:root/../playbook-wsl-bootstrap.yml"" -e ""linux_username=$($script:cred.UserName) linux_password=$($script:cred.Password)""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
         function Start-DistroConfig {
+            Set-ScriptVars
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-galaxy install -r ""$script:root/../requirements.yml""" -NoNewWindow -Wait
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-playbook ""$script:root/../playbook-wsl-config.yml"" -e ""linux_username=$($script:cred.UserName) linux_password=$($script:cred.Password)""" -NoNewWindow -Wait
             Stop-UbuntuDistro
@@ -174,7 +179,7 @@ function Set-UbuntuConfig {
         }
         function New-UbuntuDistro {
             if ((-not $ForceBootstrap) -and (Test-ExistingDistro)) {
-                throw "Distro named '$DistroName' already exists! Pass the -ForceBootstrap switch to override."
+                throw "Distro named '$DistroName' already exists! Use -ForceBootstrap to override"
             }
             $archiveName = Split-Path $DownloadPath -Leaf
             $archive = Get-UbuntuArchive | Where-Object -Property Name -EQ $archiveName
@@ -188,7 +193,6 @@ function Set-UbuntuConfig {
     }
 
     process {
-        Set-ScriptVars
         if ($NewDistro) {
             New-UbuntuDistro
         }
