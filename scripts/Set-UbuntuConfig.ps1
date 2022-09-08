@@ -44,11 +44,12 @@ Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
 Date Updated: 9-7-2022
-Version: 1.1.3
+Version: 1.1.4
 
 .LINK
 Official WSL distribution download links:
 - https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-6---install-your-linux-distribution-of-choice
+- https://github.com/microsoft/WSL/blob/master/distributions/DistributionInfo.json
 
 .EXAMPLE
     PS > . .\Set-UbuntuConfig.ps1
