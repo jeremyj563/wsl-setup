@@ -1,10 +1,10 @@
 <#   
 .SYNOPSIS
-Function that provisions and configures a development environment on an Ubuntu distribution running in WSL
+Function that provisions and configures a development environment on an Ubuntu distribution in WSL
     
 .DESCRIPTION 
 - Configures an existing Ubuntu WSL distribution using wsl.exe, then uses Ansible to apply the configuration
-- Pass the -NewDistro switch to provision and configure a new Ubuntu distribution from scratch
+- Pass the -NewDistro switch to provision and configure a new Ubuntu distribution
 
 .PARAMETER DistroName
 [string] Optional name of the distribution to provision and configure (default: Ubuntu-K8s)
@@ -25,7 +25,7 @@ Function that provisions and configures a development environment on an Ubuntu d
 [string] Optional path of where to store the distribution's Hyper-V hard disk files
 
 .PARAMETER NewDistro
-[switch] Configure an already existing distribution (matched on DistroName)
+[switch] Provision and configure a new distribution
 
 .PARAMETER ForceBootstrap
 [switch] Run the bootstrap process on an already provisioned distribution
@@ -43,8 +43,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 9-7-2022
-Version: 1.1.4
+Date Updated: 9-8-2022
+Version: 1.1.5
 
 .LINK
 Official WSL distribution download links:
