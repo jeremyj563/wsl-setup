@@ -6,11 +6,11 @@ Function that provisions and configures a development environment on an Ubuntu d
 - Configures an existing Ubuntu WSL distribution using wsl.exe, then uses Ansible to apply the configuration
 - Pass the -NewDistro switch to provision and configure a new Ubuntu distribution from scratch
 
-.PARAMETER LinuxCredential
-[PSCredential] The non-root credential to create and use for configuring the user environment
-
 .PARAMETER DistroName
 [string] Optional name of the distribution to provision and configure (default: Ubuntu-K8s)
+
+.PARAMETER LinuxCredential
+[PSCredential] The non-root credential to create and use for configuring the user environment
 
 .PARAMETER DistroUri
 [string] Optional URI of the distribution archive to download and provision
@@ -44,47 +44,49 @@ Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
 Date Updated: 9-7-2022
-Version: 1.1.2
+Version: 1.1.3
+
+.LINK
+Official WSL distribution download links:
+- https://docs.microsoft.com/en-us/windows/wsl/install-manual#step-6---install-your-linux-distribution-of-choice
 
 .EXAMPLE
     PS > . .\Set-UbuntuConfig.ps1
 
 .EXAMPLE
-    PS > Set-UbuntuConfig -DistroName '[distro-name]' -DistroUri '[distro-uri]'
+    PS > Set-UbuntuConfig -DistroName <distro-name> -DistroUri <distro-uri> -DistroSha <distro-sha>
+    PS > Set-UbuntuConfig -d <name> -u <uri> -h <sha>
 
 .EXAMPLE
-    PS > Set-UbuntuConfig -d [name] -u [uri]
+    PS > Set-UbuntuConfig -DistroName <distro-name>
+    PS > Set-UbuntuConfig -d <name>
 
 .EXAMPLE
-    PS > Set-UbuntuConfig -DistroName '[distro-name]'
+    PS > Set-UbuntuConfig -DistroName <distro-name> -NewDistro
+    PS > Set-UbuntuConfig -d <name> -n
 
 .EXAMPLE
-    PS > Set-UbuntuConfig -d [name]
-
-.EXAMPLE
-    PS > Set-UbuntuConfig -DistroName '[distro-name]' -NewDistro
-
-    .EXAMPLE
-    PS > Set-UbuntuConfig -d [name] -n
+    PS > Set-UbuntuConfig -DistroName <distro-name> -ForceBootstrap
+    PS > Set-UbuntuConfig -d <name> -f
 #>
 
 function Set-UbuntuConfig {
     [CmdletBinding()]
     param (
-        [Parameter(Mandatory=$true)]
-        [Alias('c')]
-        [PSCredential] $LinuxCredential,
-
         [Parameter(Mandatory=$false)]
         [Alias('d')]
         [string] $DistroName = 'Ubuntu-K8s',
+
+        [Parameter(Mandatory=$true)]
+        [Alias('c')]
+        [PSCredential] $LinuxCredential,
 
         [Parameter(Mandatory=$false)]
         [Alias('u')]
         [string] $DistroUri = 'https://wsldownload.azureedge.net/Ubuntu.2020.424.0_x64.appx',
 
         [Parameter(Mandatory=$false)]
-        [Alias('s')]
+        [Alias('h')]
         [string] $DistroSha = '5FBD489AC156279E0D6E3448E0070C3E3DDF3A062E14E60CAAA2C68BE78E0130',
 
         [Parameter(Mandatory=$false)]
@@ -99,32 +101,39 @@ function Set-UbuntuConfig {
         [switch] $NewDistro = $false,
 
         [Parameter(Mandatory=$false)]
+        [Alias('f')]
         [switch] $ForceBootstrap = $false,
 
         [Parameter(Mandatory=$false)]
+        [Alias('s')]
         [switch] $SetDefault = $false
     )
 
     begin {
+        function Test-LastExitCode {
+            param (
+                [string] $Message
+            )
+            if (-not $?) {
+                throw "Exit code: $LASTEXITCODE`n$Message"
+            }
+        }
         function Set-ScriptVars {
             $script:cred = $LinuxCredential.GetNetworkCredential()
             $script:root = wsl.exe -d $DistroName -u root -e wslpath $PSScriptRoot
-            if (-not $?) {
-                throw "Exit code: $LASTEXITCODE`n$script:root"
-            }
+            Test-LastExitCode -Message $script:root
         }
         function Test-DistroSha {
             $fileHash = Get-FileHash -Path $DownloadPath -Algorithm SHA256
             $sha = $fileHash.Hash
             if (-not ($sha -eq $DistroSha)) {
-                Write-Warning -Message "Distro SHA mismatch.`nExpected: $DistroSha`nGot: $sha`n"
+                Write-Warning -Message "Distro SHA mismatch`n`nExpected: $DistroSha`nGot: $sha`n"
                 return $false
             }
             return $true
         }
         function Test-UbuntuArchive {
             if (Test-Path -Path $DownloadPath) {
-                Write-Host -Object "Archive found at: $DownloadPath`n" -ForegroundColor Green
                 $validSha = Test-DistroSha
                 return $validSha
             }
@@ -152,13 +161,24 @@ function Set-UbuntuConfig {
             param (
                 [object] $Archive
             )
-            Write-Host -Object "Importing archive to: $InstallPath`n" -ForegroundColor Yellow
-            New-Item -Path $InstallPath -Type Directory -Force -ErrorAction SilentlyContinue | Out-Null
-            $importFile = Expand-UbuntuArchive -Archive $Archive
-            Start-Process -FilePath 'wsl.exe' -ArgumentList "--import $DistroName $InstallPath $importFile" -NoNewWindow -Wait
+            if (Test-UbuntuArchive) {
+                Write-Host -Object "Archive found at: $DownloadPath`n" -ForegroundColor Green
+                Write-Host -Object "Importing archive to: $InstallPath`n" -ForegroundColor Yellow
+                New-Item -Path $InstallPath -Type Directory -Force -ErrorAction SilentlyContinue | Out-Null
+                $importFile = Expand-UbuntuArchive -Archive $Archive
+                $result = wsl.exe --import $DistroName $InstallPath $importFile
+                Test-LastExitCode -Message $result
+            }
         }
         function Stop-UbuntuDistro {
             Start-Process -FilePath wsl.exe -ArgumentList "--terminate $DistroName" -NoNewWindow -Wait
+        }
+        function Test-ExistingDistro {
+            $distros = wsl.exe --list
+            $exists = $DistroName -in $distros
+            if ((-not $ForceBootstrap) -and $exists) {
+                throw "Distro named '$DistroName' already exists! Use -ForceBootstrap to override"
+            }
         }
         function Start-DistroBootstrap {
             Set-ScriptVars
@@ -172,19 +192,10 @@ function Set-UbuntuConfig {
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-playbook ""$script:root/../playbook-wsl-config.yml"" -e ""linux_username=$($script:cred.UserName) linux_password=$($script:cred.Password)""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
-        function Test-ExistingDistro {
-            $distros = wsl.exe --list
-            $exists = $DistroName -in $distros
-            return $exists
-        }
         function New-UbuntuDistro {
-            if ((-not $ForceBootstrap) -and (Test-ExistingDistro)) {
-                throw "Distro named '$DistroName' already exists! Use -ForceBootstrap to override"
-            }
             $archiveName = Split-Path $DownloadPath -Leaf
             $archive = Get-UbuntuArchive | Where-Object -Property Name -EQ $archiveName
             Import-UbuntuDistro -Archive $archive
-            Start-DistroBootstrap
         }
         function Set-DefaultDistro {
             Write-Host -Object "Setting distro '$DistroName' as default`n" -ForegroundColor Yellow
@@ -195,6 +206,10 @@ function Set-UbuntuConfig {
     process {
         if ($NewDistro) {
             New-UbuntuDistro
+            Start-DistroBootstrap
+        } elseif ($ForceBootstrap) {
+            Test-ExistingDistro
+            Start-DistroBootstrap
         }
         Start-DistroConfig
     }
