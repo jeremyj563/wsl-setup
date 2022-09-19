@@ -3,8 +3,8 @@
 Function that provisions and configures a development environment on an Ubuntu distribution in WSL
     
 .DESCRIPTION 
-- Configures an existing Ubuntu WSL distribution using wsl.exe, then uses Ansible to apply the configuration
-- Pass the -NewDistro switch to provision and configure a new Ubuntu distribution
+* Configures an existing Ubuntu WSL distribution using wsl.exe, then uses Ansible to apply the configuration
+* Pass the -NewDistro switch to provision and configure a new Ubuntu distribution
 
 .PARAMETER DistroName
 [string] Optional name of the distribution to provision and configure (default: Ubuntu-K8s)
