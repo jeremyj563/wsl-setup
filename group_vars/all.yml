@@ -58,8 +58,9 @@ resolv_search: citrix-dch.local
 
 # shell
 bash_profile_scripts:
-  - history.sh
+  - ansible.sh
   - brew.sh
+  - history.sh
   - krew.sh
   - kubectl-aliases.sh
   - kubectl-completion.sh
