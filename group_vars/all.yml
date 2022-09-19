@@ -49,7 +49,9 @@ krew_plugins:
 
 # nvm
 nvm_profile: "/home/{{ linux_username }}/.bashrc"
-nodejs_version: '16'
+nodejs_version: '16.17.0'
+nvm_npm_packages:
+  - '@nestjs/cli'
 
 # pip
 pip_packages:
