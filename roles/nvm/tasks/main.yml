@@ -4,4 +4,4 @@
     name: morgangraphics.ansible_role_nvm
   vars:
     nvm_commands:
-    - "nvm exec default npm install --global {{ npm_packages | join('\n') }}"
+    - "nvm exec default npm install --global {{ npm_packages | join(' ') }}"
