@@ -7,19 +7,19 @@
 ---
 - hosts: localhost
   vars_prompt:
-    - name: linux_username
-      prompt: "Linux username"
-    - name: linux_password
-      prompt: "Linux password"
-      private: yes
+  - name: linux_username
+    prompt: "Linux username"
+  - name: linux_password
+    prompt: "Linux password"
+    private: yes
   vars:
     ansible_become_password: "{{ linux_password }}"
   roles:
-    - apt
-    - brew
-    - krew
-    - nvm
-    - pip
-    - shell
-    - workspace
-    - k9s
+  - apt
+  - brew
+  - krew
+  - nvm
+  - pip
+  - shell
+  - workspace
+  - k9s
