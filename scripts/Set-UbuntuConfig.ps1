@@ -27,6 +27,9 @@ Function that provisions and configures a development environment on an Ubuntu d
 .PARAMETER NewDistro
 [switch] Provision and configure a new distribution
 
+.PARAMETER BootstrapOnly
+[switch] Run the bootstrap process then skip configuring the distribution
+
 .PARAMETER ForceBootstrap
 [switch] Run the bootstrap process on an already provisioned distribution
 
@@ -43,8 +46,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 9-8-2022
-Version: 1.1.5
+Date Updated: 9-19-2022
+Version: 1.1.6
 
 .LINK
 Official WSL distribution download links:
@@ -91,6 +94,7 @@ function Set-UbuntuConfig {
         [string] $DistroSha = '5FBD489AC156279E0D6E3448E0070C3E3DDF3A062E14E60CAAA2C68BE78E0130',
 
         [Parameter(Mandatory=$false)]
+        [Alias('l')]
         [string] $DownloadPath = "$env:TEMP\wsl\Ubuntu.zip",
 
         [Parameter(Mandatory=$false)]
@@ -100,6 +104,10 @@ function Set-UbuntuConfig {
         [Parameter(Mandatory=$false)]
         [Alias('n')]
         [switch] $NewDistro = $false,
+
+        [Parameter(Mandatory=$false)]
+        [Alias('b')]
+        [switch] $BootstrapOnly = $false,
 
         [Parameter(Mandatory=$false)]
         [Alias('f')]
@@ -212,7 +220,9 @@ function Set-UbuntuConfig {
             Test-ExistingDistro
             Start-DistroBootstrap
         }
-        Start-DistroConfig
+        If (-not $BootstrapOnly) {
+            Start-DistroConfig
+        }
     }
 
     end {
