@@ -1,6 +1,6 @@
 ---
 - name: Install brew
-  include_role:
+  import_role:
     name: markosamuli.linuxbrew
   vars:
     linuxbrew_use_installer: true
