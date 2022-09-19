@@ -1,12 +1,14 @@
 function Set-ProfileScript {
     $Local:ErrorActionPreference = 'SilentlyContinue'
     $value = ". $PSScriptRoot\Set-UbuntuConfig.ps1"
-    $path = $PROFILE.CurrentUserAllHosts
+    $file = $PROFILE.CurrentUserAllHosts
 
-    $valueExists = Select-String -Path "$path" -Pattern "$value" -SimpleMatch -Quiet
+    $valueExists = Select-String -Path "$file" -Pattern "$value" -SimpleMatch -Quiet
 
     if (-not $valueExists) {
-        Add-Content -Path "$path" -Value "`n$value"
+        $path = Split-Path -LiteralPath $file
+        New-Item -Path $path -ItemType Directory -Force | Out-Null
+        Add-Content -Path "$file" -Value "`n$value"
     }
 }
 
