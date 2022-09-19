@@ -17,6 +17,7 @@
   roles:
   - apt
   - brew
+  - git
   - krew
   - nvm
   - pip
