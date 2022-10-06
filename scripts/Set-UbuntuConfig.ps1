@@ -220,7 +220,7 @@ function Set-UbuntuConfig {
             Test-ExistingDistro
             Start-DistroBootstrap
         }
-        If (-not $BootstrapOnly) {
+        if (-not $BootstrapOnly) {
             Start-DistroConfig
         }
     }
