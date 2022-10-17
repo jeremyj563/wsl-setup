@@ -60,9 +60,9 @@ pip_packages:
   - pyvmomi==7.0.3
 
 # resolv
-resolv_nameserver_primary: '10.1.0.10'
-resolv_nameserver_secondary: '173.16.48.4'
-resolv_search: citrix-dch.local
+resolv_nameserver_primary: '192.168.192.27'
+resolv_nameserver_secondary: '192.168.192.28'
+resolv_search: jerlyd.com
 
 # shell
 bash_profile_scripts:
