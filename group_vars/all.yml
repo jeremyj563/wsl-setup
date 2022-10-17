@@ -37,7 +37,7 @@ brew_packages:
 
 # git
 git_global_user_name: Jeremy Johnson
-git_global_user_email: jeremy.m.johnson@davenportiowa.com
+git_global_user_email: modernclassicgamer@gmail.com
 git_global_credential_helper: store
 
 # krew
