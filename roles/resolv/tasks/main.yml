@@ -4,7 +4,7 @@
     path: /etc/resolv.conf
     state: absent
 
-- name: Configure /etc/resplv.conf
+- name: Configure /etc/resolv.conf
   copy:
     dest: /etc/resolv.conf
     owner: root
