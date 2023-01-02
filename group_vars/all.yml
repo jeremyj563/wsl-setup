@@ -77,4 +77,4 @@ bash_profile_scripts:
 workspace_repos_dir: /home/{{ linux_username }}/source/repos
 workspace_repos:
   - name: kubectl-aliases
-    url: https://github.com/Davenport-Iowa/kubectl-aliases.git
+    url: https://github.com/jeremyj563/kubectl-aliases.git
