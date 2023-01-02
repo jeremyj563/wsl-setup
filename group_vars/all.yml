@@ -60,8 +60,7 @@ pip_packages:
   - pyvmomi==7.0.3
 
 # resolv
-resolv_nameserver_primary: '192.168.192.27'
-resolv_nameserver_secondary: '192.168.192.28'
+resolv_nameserver: '10.0.2.11'
 resolv_search: jerlyd.com
 
 # shell
