@@ -37,7 +37,7 @@ brew_packages:
 
 # git
 git_global_user_name: Jeremy Johnson
-git_global_user_email: jeremy.m.johnson@davenportiowa.com
+git_global_user_email: modernclassicgamer@gmail.com
 git_global_credential_helper: store
 
 # krew
@@ -60,9 +60,8 @@ pip_packages:
   - pyvmomi==7.0.3
 
 # resolv
-resolv_nameserver_primary: '10.1.0.10'
-resolv_nameserver_secondary: '173.16.48.4'
-resolv_search: citrix-dch.local
+resolv_nameserver: '10.0.2.11'
+resolv_search: jerlyd.com
 
 # shell
 bash_profile_scripts:
@@ -78,4 +77,4 @@ bash_profile_scripts:
 workspace_repos_dir: /home/{{ linux_username }}/source/repos
 workspace_repos:
   - name: kubectl-aliases
-    url: https://github.com/Davenport-Iowa/kubectl-aliases.git
+    url: https://github.com/jeremyj563/kubectl-aliases.git

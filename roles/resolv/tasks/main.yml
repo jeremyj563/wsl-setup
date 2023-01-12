@@ -15,6 +15,5 @@
       |
       # Ansible managed
       
-      nameserver {{ resolv_nameserver_primary }}
-      nameserver {{ resolv_nameserver_secondary }}
+      nameserver {{ resolv_nameserver }}
       search {{ resolv_search }}
