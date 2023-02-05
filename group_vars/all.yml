@@ -34,6 +34,7 @@ brew_packages:
   - argocd-autopilot
   - krew
   - nvm
+  - gh
 
 # git
 git_global_user_name: Jeremy Johnson
@@ -49,9 +50,9 @@ krew_plugins:
 
 # nvm
 nvm_profile: "/home/{{ linux_username }}/.bashrc"
-nodejs_version: '16'
+nodejs_version: "16"
 npm_packages:
-  - '@nestjs/cli'
+  - "@nestjs/cli"
   - dotenv-cli
 
 # pip
@@ -60,7 +61,7 @@ pip_packages:
   - pyvmomi==7.0.3
 
 # resolv
-resolv_nameserver: '10.0.2.11'
+resolv_nameserver: "10.0.2.11"
 resolv_search: jerlyd.com
 
 # shell
