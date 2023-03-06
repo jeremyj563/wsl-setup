@@ -9,11 +9,10 @@
     dest: /etc/resolv.conf
     owner: root
     group: root
-    mode: '0644'
+    mode: "0644"
     attr: +i
-    content:
-      |
+    content: |
       # Ansible managed
-      
+
       nameserver {{ resolv_nameserver }}
       search {{ resolv_search }}

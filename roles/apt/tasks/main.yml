@@ -6,7 +6,7 @@
 
 - name: Upgrade all apt packages
   package:
-    name: '*'
+    name: "*"
     state: latest
   become: true
 

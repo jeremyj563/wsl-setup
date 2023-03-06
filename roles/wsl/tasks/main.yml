@@ -4,9 +4,8 @@
     dest: /etc/wsl.conf
     owner: root
     group: root
-    mode: '0644'
-    content:
-      |
+    mode: "0644"
+    content: |
       # Ansible managed
 
       [user]

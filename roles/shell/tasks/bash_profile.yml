@@ -5,7 +5,7 @@
     dest: /home/{{ linux_username }}/.bash_profile
     owner: "{{ linux_username }}"
     group: "{{ linux_username }}"
-    mode: '0644'
+    mode: "0644"
 
 - name: Create directory /home/{{ linux_username }}/.bash_profile.d
   file:
@@ -13,7 +13,7 @@
     state: directory
     owner: "{{ linux_username }}"
     group: "{{ linux_username }}"
-    mode: '0755'
+    mode: "0755"
 
 - name: Create scripts in /home/{{ linux_username }}/.bash_profile.d
   copy:
@@ -21,8 +21,7 @@
     dest: "/home/{{ linux_username }}/.bash_profile.d/{{ script }}"
     owner: "{{ linux_username }}"
     group: "{{ linux_username }}"
-    mode: '0644'
+    mode: "0644"
   with_items: "{{ bash_profile_scripts }}"
   loop_control:
     loop_var: script
-  

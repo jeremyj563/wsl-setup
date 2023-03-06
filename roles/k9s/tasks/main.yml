@@ -3,22 +3,21 @@
   file:
     path: /home/{{ linux_username }}/.config
     state: directory
-    mode: '0700'
+    mode: "0700"
 
 - name: "Ensure directory exists: /home/{{ linux_username }}/.config/k9s"
   file:
     path: /home/{{ linux_username }}/.config/k9s
     state: directory
-    mode: '0755'
+    mode: "0755"
 
 - name: Configure /home/{{ linux_username }}/.config/k9s/config.yml
   copy:
     dest: /home/{{ linux_username }}/.config/k9s/config.yml
-    owner: '{{ linux_username }}'
-    group: '{{ linux_username }}'
-    mode: '0644'
-    content:
-      |
+    owner: "{{ linux_username }}"
+    group: "{{ linux_username }}"
+    mode: "0644"
+    content: |
       # Ansible managed
       ---
       k9s:
