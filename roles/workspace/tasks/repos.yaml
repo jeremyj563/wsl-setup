@@ -1,0 +1,17 @@
+---
+- name: Create workspace repositories directory {{ workspace_repos_dir }}
+  file:
+    path: "{{ workspace_repos_dir }}"
+    state: directory
+    owner: "{{ linux_username }}"
+    group: "{{ linux_username }}"
+    mode: "0755"
+
+- name: Clone workspace git repos
+  git:
+    repo: "{{ repo.url }}"
+    dest: "{{ workspace_repos_dir }}/{{ repo.dir | default(workspace_default_dir) }}/{{ repo.name }}"
+  with_items: "{{ workspace_repos }}"
+  when: repo.name != 'dotfiles'
+  loop_control:
+    loop_var: repo

@@ -1,16 +1,8 @@
 ---
-- name: Create workspace repositories directory {{ workspace_repos_dir }}
-  file:
-    path: "{{ workspace_repos_dir }}"
-    state: directory
-    owner: "{{ linux_username }}"
-    group: "{{ linux_username }}"
-    mode: "0755"
+- import_tasks:
+    file: repos.yaml
 
-- name: Clone workspace git repos
-  git:
-    repo: "{{ repo.url }}"
-    dest: "{{ workspace_repos_dir }}/{{ repo.dir | default(workspace_default_dir) }}/{{ repo.name }}"
-  with_items: "{{ workspace_repos }}"
-  loop_control:
-    loop_var: repo
+- import_tasks:
+    file: dotfiles.yaml
+  vars:
+    dotfiles_repo: "{{ workspace_repos | selectattr('name', '==', 'dotfiles') | first }}"

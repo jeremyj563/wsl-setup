@@ -1,0 +1,8 @@
+---
+- name: Clone dotfiles repository
+  git:
+    repo: "{{ dotfiles_repo.url }}"
+    dest: "/home/{{ linux_username }}/.dotfiles"
+
+- name: Run dotfiles install script
+  script: "/home/{{ linux_username }}/.dotfiles/install.sh"
