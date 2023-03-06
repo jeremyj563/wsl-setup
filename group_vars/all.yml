@@ -68,6 +68,7 @@ resolv_search: jerlyd.com
 
 # shell
 bash_profile_scripts:
+  - aliases.sh
   - ansible.sh
   - brew.sh
   - history.sh
