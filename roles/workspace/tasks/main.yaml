@@ -5,12 +5,12 @@
     state: directory
     owner: "{{ linux_username }}"
     group: "{{ linux_username }}"
-    mode: '0755'
+    mode: "0755"
 
 - name: Clone workspace git repos
   git:
     repo: "{{ repo.url }}"
-    dest: "{{ workspace_repos_dir }}/{{ repo.name }}"
+    dest: "{{ workspace_repos_dir }}/{{ repo.dir | default(workspace_default_dir) }}/{{ repo.name }}"
   with_items: "{{ workspace_repos }}"
   loop_control:
     loop_var: repo

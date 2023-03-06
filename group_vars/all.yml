@@ -76,7 +76,13 @@ bash_profile_scripts:
   - ssh.sh
 
 # workspace
+workspace_default_dir: jeremyj563
 workspace_repos_dir: /home/{{ linux_username }}/source/repos
 workspace_repos:
+  - name: dotfiles
+    url: https://github.com/jeremyj563/dotfiles.git
   - name: kubectl-aliases
     url: https://github.com/jeremyj563/kubectl-aliases.git
+  - name: scripts
+    url: https://gitlab.com/jmjohnson85/scripts.git
+    dir: jmjohnson85
