@@ -1,4 +1,12 @@
 ---
+- name: Include script /home/{{ linux_username }}/.bash_profile from /home/{{ linux_username }}/.bashrc
+  blockinfile:
+    dest: /home/{{ linux_username }}/.bashrc
+    block: >
+      source /home/{{ linux_username }}/.bash_profile
+    marker: "# {mark} ANSIBLE MANAGED BLOCK - wsl-setup"
+    insertafter: EOF
+
 - name: Create script /home/{{ linux_username }}/.bash_profile
   copy:
     src: .bash_profile
