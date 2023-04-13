@@ -1,11 +1,15 @@
 ---
 # apt
 apt_packages:
+  - make
+  - build-essential
+  - libssl-dev
   - apt-transport-https
   - apt-file
   - bash-completion
   - iputils-ping
   - python3-pip
+  - python-openssl
   - openssh-server
   - openssh-client
   - libkrb5-dev
@@ -38,11 +42,15 @@ brew_packages:
   - nvm
   - gh
   - pnpm
+  - openssl
+  - pyenv
+  - poetry
 
 # git
 git_global_user_name: Jeremy Johnson
 git_global_user_email: modernclassicgamer@gmail.com
 git_global_credential_helper: store
+git_global_core_filemode: "false"
 
 # krew
 krew_bin_path: "{{ brew_path }}/kubectl-krew"
@@ -80,7 +88,7 @@ bash_profile_scripts:
 
 # workspace
 workspace_default_dir: jeremyj563
-workspace_repos_dir: /home/{{ linux_username }}/source/repos
+workspace_repos_dir: /home/{{ linux_username }}/source/repos.personal
 workspace_repos:
   - name: dotfiles
     url: https://github.com/jeremyj563/dotfiles.git
@@ -89,3 +97,5 @@ workspace_repos:
   - name: scripts
     url: https://gitlab.com/jmjohnson85/scripts.git
     dir: jmjohnson85
+  - name: proxy-switcher
+    url: https://github.com/jeremyj563/proxy-switcher.git
