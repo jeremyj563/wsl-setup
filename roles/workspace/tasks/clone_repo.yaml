@@ -1,0 +1,11 @@
+---
+- name: Check if git repo {{ repo_name }} has already been cloned
+  stat:
+    path: "{{ repo_path }}"
+  register: dir
+
+- name: Clone git repo {{ repo_name }} in {{ repo_dir }}
+  git:
+    repo: "{{ repo_url }}"
+    dest: "{{ repo_path }}"
+  when: not dir.stat.exists

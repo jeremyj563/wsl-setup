@@ -6,11 +6,18 @@
     owner: "{{ linux_username }}"
     group: "{{ linux_username }}"
     mode: "0755"
+    recurse: true
+  become: true
 
 - name: Clone workspace git repos
-  git:
-    repo: "{{ repo.url }}"
-    dest: "{{ workspace_repos_dir }}/{{ repo.dir | default(workspace_default_dir) }}/{{ repo.name }}"
+  include_role:
+    name: workspace
+    tasks_from: clone_repo
+  vars:
+    repo_name: "{{ repo.name }}"
+    repo_dir: "{{ repo.dir }}"
+    repo_url: "{{ repo.url }}"
+    repo_path: "{{ workspace_repos_dir }}/{{ repo.dir | default(workspace_default_dir) }}/{{ repo.name }}"
   with_items: "{{ workspace_repos }}"
   when: repo.name != 'dotfiles'
   loop_control:
