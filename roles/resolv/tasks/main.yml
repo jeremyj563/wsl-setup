@@ -12,7 +12,7 @@
     mode: "0644"
     attr: +i
     content: |
-      # Ansible managed
+      # ANSIBLE MANAGED FILE - wsl-setup
 
       nameserver {{ resolv_nameserver }}
       search {{ resolv_search }}
