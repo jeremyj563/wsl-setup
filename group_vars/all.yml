@@ -7,6 +7,7 @@ apt_packages:
   - apt-transport-https
   - apt-file
   - bash-completion
+  - net-tools
   - iputils-ping
   - python3-pip
   - python-openssl
