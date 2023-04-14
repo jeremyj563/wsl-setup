@@ -8,6 +8,7 @@ apt_packages:
   - apt-file
   - bash-completion
   - net-tools
+  - dnsutils
   - iputils-ping
   - python3-pip
   - python-openssl
