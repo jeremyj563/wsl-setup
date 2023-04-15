@@ -1,5 +1,6 @@
 ---
 - name: Configure /etc/wsl.conf
+  become: true
   copy:
     dest: /etc/wsl.conf
     owner: root

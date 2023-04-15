@@ -1,10 +1,12 @@
 ---
 - name: Unlink /etc/resolv.conf
+  become: true
   file:
     path: /etc/resolv.conf
     state: absent
 
 - name: Configure /etc/resolv.conf
+  become: true
   copy:
     dest: /etc/resolv.conf
     owner: root
