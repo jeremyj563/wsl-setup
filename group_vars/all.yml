@@ -24,6 +24,7 @@ apt_packages:
   - neovim
   - git
   - curl
+  - wget
   - tmux
   - unzip
   - fzf
