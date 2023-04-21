@@ -9,6 +9,7 @@
   vars_prompt:
     - name: linux_username
       prompt: "Linux username"
+      private: no
     - name: linux_password
       prompt: "Linux password"
       private: yes
