@@ -24,6 +24,7 @@ apt_packages:
   - neovim
   - git
   - curl
+  - wget
   - tmux
   - unzip
   - fzf
@@ -54,6 +55,7 @@ git_global_user_name: Jeremy Johnson
 git_global_user_email: modernclassicgamer@gmail.com
 git_global_credential_helper: store
 git_global_core_filemode: "false"
+git_global_safe_directory: "*"
 
 # krew
 krew_bin_path: "{{ brew_path }}/kubectl-krew"
