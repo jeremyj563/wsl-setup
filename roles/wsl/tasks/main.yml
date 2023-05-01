@@ -14,3 +14,6 @@
 
       [network]
       generateResolvConf = false
+
+      [automount]
+      options = "metadata"
