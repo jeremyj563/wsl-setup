@@ -1,0 +1,24 @@
+---
+- name: Insert proxy variables into {{ ansible_env.HOME }}/.bashrc
+  blockinfile:
+    path: "{{ ansible_env.HOME }}/.bashrc"
+    create: true
+    block: |
+      export HTTP_PROXY="{{ proxy_url }}"
+      export HTTPS_PROXY="{{ proxy_url }}"
+      export http_proxy="{{ proxy_url }}"
+      export https_proxy="{{ proxy_url }}"
+      export NO_PROXY="{{ no_proxy_csv }}"
+      export no_proxy="{{ no_proxy_csv }}"
+
+- name: Insert proxy variables into /home/{{ linux_username }}/.bashrc
+  blockinfile:
+    path: "/home/{{ linux_username }}/.bashrc"
+    create: true
+    block: |
+      export HTTP_PROXY="{{ proxy_url }}"
+      export HTTPS_PROXY="{{ proxy_url }}"
+      export http_proxy="{{ proxy_url }}"
+      export https_proxy="{{ proxy_url }}"
+      export NO_PROXY="{{ no_proxy_csv }}"
+      export no_proxy="{{ no_proxy_csv }}"

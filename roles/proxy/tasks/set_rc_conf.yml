@@ -1,0 +1,17 @@
+---
+- name: Set proxy config in /etc/rc.conf
+  become: true
+  blockinfile:
+    path: "/etc/rc.conf"
+    create: true
+    mode: "0644"
+    owner: root
+    group: root
+    block: |
+      rc_env_allow="*"
+      export HTTP_PROXY="{{ proxy_url }}"
+      export HTTPS_PROXY="{{ proxy_url }}"
+      export http_proxy="{{ proxy_url }}"
+      export https_proxy="{{ proxy_url }}"
+      export NO_PROXY=".%2Fpipe%2Fdocker_engine,{{ no_proxy_csv }}"
+      export no_proxy=".%2Fpipe%2Fdocker_engine,localhost,127.0.0.1,.rockwellcollins.com"

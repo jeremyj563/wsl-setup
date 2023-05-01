@@ -1,0 +1,10 @@
+---
+- import_tasks:
+    file: set_rc_conf.yml
+    when: proxy_url != ""
+- import_tasks:
+    file: set_apt_config.yml
+    when: proxy_url != ""
+- import_tasks:
+    file: set_env_vars.yml
+    when: proxy_url != ""

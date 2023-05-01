@@ -80,6 +80,10 @@ pip_packages:
 resolv_nameserver: "10.0.2.11"
 resolv_search: jerlyd.com
 
+# proxy
+proxy_url: ""
+no_proxy_csv: "localhost,127.0.0.1,.jerlyd.com"
+
 # shell
 bash_profile_scripts:
   - aliases.sh

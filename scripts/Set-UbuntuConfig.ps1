@@ -210,6 +210,9 @@ function Set-UbuntuConfig {
             Write-Host -Object "Setting distro '$DistroName' as default`n" -ForegroundColor Yellow
             Start-Process -FilePath wsl.exe -ArgumentList "--set-default $DistroName" -NoNewWindow -Wait
         }
+        function Set-Environment {
+            $env:WSLENV = "HTTP_PROXY:HTTPS_PROXY:FTP_PROXY:NO_PROXY"
+        }
     }
 
     process {
