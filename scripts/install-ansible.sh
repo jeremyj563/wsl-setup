@@ -1,7 +1,7 @@
 #!/bin/bash
 
-sudo -E apt update &&
-    sudo -E apt install -y software-properties-common &&
+sudo apt update &&
+    sudo apt install -y software-properties-common &&
     yes | sudo -E apt-add-repository ppa:ansible/ansible &&
-    sudo -E apt update &&
-    sudo -E apt install -y ansible;
+    sudo apt update &&
+    sudo apt install -y ansible
