@@ -28,3 +28,9 @@
     name: safe.directory
     scope: global
     value: "{{ git_global_safe_directory }}"
+
+- name: "Set Git global http.sslVerify to {{ git_global_ssl_verify }}"
+  git_config:
+    name: http.sslVerify
+    scope: global
+    value: "{{ git_global_ssl_verify }}"
