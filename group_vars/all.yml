@@ -49,6 +49,7 @@ brew_packages:
   - openssl
   - pyenv
   - poetry
+  - Azure/kubelogin/kubelogin
 
 # git
 git_global_user_name: Jeremy Johnson
