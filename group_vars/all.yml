@@ -23,6 +23,7 @@ apt_packages:
   - nano
   - neovim
   - git
+  - tig
   - curl
   - wget
   - tmux
