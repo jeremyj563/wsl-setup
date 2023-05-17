@@ -11,7 +11,6 @@ apt_packages:
   - dnsutils
   - iputils-ping
   - python3-pip
-  - python-openssl
   - openssh-server
   - openssh-client
   - libkrb5-dev
