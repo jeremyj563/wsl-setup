@@ -87,7 +87,7 @@ proxy_url: ""
 no_proxy_csv: "localhost,127.0.0.1,.jerlyd.com"
 
 # shell
-bash_profile_scripts:
+bashrc_scripts:
   - aliases.sh
   - ansible.sh
   - brew.sh

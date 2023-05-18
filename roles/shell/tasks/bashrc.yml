@@ -1,0 +1,25 @@
+---
+- name: Create directory /home/{{ linux_username }}/.bashrc.d
+  file:
+    path: /home/{{ linux_username }}/.bashrc.d
+    state: directory
+    owner: "{{ linux_username }}"
+    group: "{{ linux_username }}"
+    mode: "0755"
+
+- name: Create scripts in /home/{{ linux_username }}/.bashrc.d
+  copy:
+    src: "{{ script }}"
+    dest: "/home/{{ linux_username }}/.bashrc.d/{{ script }}"
+    owner: "{{ linux_username }}"
+    group: "{{ linux_username }}"
+    mode: "0644"
+  with_items: "{{ bashrc_scripts }}"
+  loop_control:
+    loop_var: script
+
+- name: Source all scripts in /home/{{ linux_username }}/.bashrc.d
+  blockinfile:
+    path: /home/{{ linux_username }}/.bashrc
+    block: |
+      for f in ~/.bashrc.d/*.sh; do source $f; done
