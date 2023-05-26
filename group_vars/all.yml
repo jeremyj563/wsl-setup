@@ -15,7 +15,7 @@ apt_packages:
   - openssh-client
   - libkrb5-dev
   - krb5-user
-  - locate
+  - mlocate
   - less
   - gcc
   - sudo
