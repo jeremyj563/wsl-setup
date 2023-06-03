@@ -27,6 +27,7 @@ apt_packages:
   - tmux
   - unzip
   - fzf
+  - jq
 
 # brew
 linuxbrew_install_tmp: /tmp/linuxbrew
