@@ -28,6 +28,7 @@ apt_packages:
   - unzip
   - fzf
   - jq
+  - awscli
 
 # brew
 linuxbrew_install_tmp: /tmp/linuxbrew
@@ -79,6 +80,9 @@ npm_packages:
 pip_packages:
   - pykerberos==1.2.4
   - pyvmomi==7.0.3
+  - boto3>=1.26.155
+  - requests>=2.31.0
+  - bs4>=0.0.1
 
 # resolv
 resolv_nameserver: "10.0.2.11"
