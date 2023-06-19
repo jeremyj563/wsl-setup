@@ -1,0 +1,11 @@
+---
+- name: Touch workspace directories
+  file:
+    path: "{{ directory }}"
+    state: directory
+    owner: "{{ linux_username }}"
+    group: "{{ linux_username }}"
+    mode: "0755"
+  with_items: "{{ workspace_touch_dirs }}"
+  loop_control:
+    loop_var: directory

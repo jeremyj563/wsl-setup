@@ -6,3 +6,6 @@
     file: dotfiles.yaml
   vars:
     dotfiles_repo: "{{ workspace_repos | selectattr('name', '==', 'dotfiles') | first }}"
+
+- import_tasks:
+    file: dirs.yaml

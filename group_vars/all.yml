@@ -10,6 +10,7 @@ apt_packages:
   - net-tools
   - dnsutils
   - iputils-ping
+  - python-dev
   - python3-pip
   - openssh-server
   - openssh-client
@@ -28,7 +29,6 @@ apt_packages:
   - unzip
   - fzf
   - jq
-  - awscli
 
 # brew
 linuxbrew_install_tmp: /tmp/linuxbrew
@@ -83,6 +83,8 @@ pip_packages:
   - boto3>=1.26.155
   - requests>=2.31.0
   - bs4>=0.0.1
+  - awscli>=1.27.155
+  - kubernetes>=26.1.0
 
 # resolv
 resolv_nameserver: "10.0.2.11"
@@ -116,3 +118,5 @@ workspace_repos:
     dir: jmjohnson85
   - name: proxy-switcher
     url: https://github.com/jeremyj563/proxy-switcher.git
+workspace_touch_dirs:
+  - /home/{{ linux_username }}/.aws
