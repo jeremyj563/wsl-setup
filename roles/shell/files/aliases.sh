@@ -21,6 +21,3 @@ alias proxy_on='psw $PROXY'
 alias proxy_off='psw'
 alias ports='netstat -tulanp'
 alias upgrade='sudo apt update && sudo apt full-upgrade'
-
-# windows apps
-alias k3d='k3d.exe'
