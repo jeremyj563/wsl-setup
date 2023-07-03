@@ -92,7 +92,7 @@ resolv_search: jerlyd.com
 
 # proxy
 proxy_url: ""
-no_proxy_csv: "localhost,127.0.0.1,.jerlyd.com"
+no_proxy_csv: 0.0.0.0,127.0.0.0/8,172.16.0.0/12,192.168.0.0/16,localhost,local,svc
 
 # shell
 bashrc_scripts:

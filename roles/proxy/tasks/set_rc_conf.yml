@@ -14,4 +14,4 @@
       export http_proxy="{{ proxy_url }}"
       export https_proxy="{{ proxy_url }}"
       export NO_PROXY=".%2Fpipe%2Fdocker_engine,{{ no_proxy_csv }}"
-      export no_proxy=".%2Fpipe%2Fdocker_engine,localhost,127.0.0.1,.rockwellcollins.com"
+      export no_proxy=".%2Fpipe%2Fdocker_engine,{{ no_proxy_csv }}"
