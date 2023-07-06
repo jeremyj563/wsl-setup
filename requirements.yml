@@ -1,5 +1,5 @@
 ---
 - src: morgangraphics.ansible_role_nvm # https://github.com/morgangraphics/ansible-role-nvm
-  version: v1.4.3
+  version: v1.5.1
 - src: markosamuli.linuxbrew # https://github.com/markosamuli/ansible-linuxbrew
   version: v1.2.2
