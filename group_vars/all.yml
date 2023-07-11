@@ -10,7 +10,6 @@ apt_packages:
   - net-tools
   - dnsutils
   - iputils-ping
-  - python-dev
   - python3-pip
   - openssh-server
   - openssh-client
