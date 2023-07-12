@@ -1,7 +1,15 @@
 ---
-- name: Install nvm, nodejs, and global npm packages
+- debug:
+    msg:
+      - "nvm_shell_init_file: {{ nvm_shell_init_file }}"
+      - "nvm_version: {{ nvm_version }}"
+      - "nvm_node_version: {{ nvm_node_version }}"
+      - "nvm_npm_packages: {{ nvm_npm_packages }}"
+
+- name: Install nvm and nodejs
   import_role:
-    name: morgangraphics.ansible_role_nvm
-  vars:
-    nvm_commands:
-      - "nvm exec default npm install --global {{ npm_packages | join(' ') }}"
+    name: stephdewit.nvm
+
+- name: Install global npm packages
+  shell: >
+    /bin/bash -c "source ~/.nvm/nvm.sh && nvm exec default npm install --global {{ nvm_npm_packages | join(' ') }}"

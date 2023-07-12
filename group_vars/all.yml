@@ -69,11 +69,16 @@ krew_plugins:
   - ingress-nginx
 
 # nvm
-nvm_profile: "/home/{{ linux_username }}/.bashrc"
-nodejs_version: "16"
-npm_packages:
+nvm_shell_init_file: "/home/{{ linux_username }}/.profile"
+nvm_version: latest
+nvm_node_version: lts
+nvm_npm_packages:
   - "@nestjs/cli"
+  - "@trpc/client"
+  - "@trpc/server"
   - dotenv-cli
+  - vtop
+  - yo
 
 # pip
 pip_packages:
