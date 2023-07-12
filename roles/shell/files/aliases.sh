@@ -1,5 +1,6 @@
 # ANSIBLE MANAGED FILE - wsl-setup
 
+# general
 alias reload!='. ~/.bashrc'
 alias ..='cd ..'
 alias ...='cd ../../'
@@ -21,3 +22,9 @@ alias proxy_on='psw $PROXY'
 alias proxy_off='psw'
 alias ports='netstat -tulanp'
 alias upgrade='sudo apt update && sudo apt full-upgrade'
+
+# aws
+alias apls='aws configure list-profiles'
+alias apu='AWS_PROFILE='
+alias apc='echo $AWS_PROFILE'
+alias api='aws sts get-caller-identity'
