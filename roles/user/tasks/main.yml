@@ -4,7 +4,7 @@
     name: "{{ linux_username }}"
     password: "{{ linux_password | password_hash('sha256') }}"
     uid: 1000
-    shell: /bin/zsh
+    shell: /bin/bash
     groups:
       - adm
       - dialout
