@@ -24,6 +24,8 @@ alias ports='netstat -tulanp'
 alias upgrade='sudo apt update && sudo apt full-upgrade'
 
 # aws
+alias a='awsv2'
+alias aws='awsv2'
 alias apls='aws configure list-profiles'
 alias apu='AWS_PROFILE='
 alias apc='echo $AWS_PROFILE'
