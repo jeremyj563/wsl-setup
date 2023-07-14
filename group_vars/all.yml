@@ -92,7 +92,8 @@ pip_packages:
 
 # resolv
 resolv_nameserver: "10.0.2.11"
-resolv_search: jerlyd.com
+resolv_nameserver_fallback: "192.10.0.1"
+resolv_search_domains: jerlyd.com
 
 # proxy
 proxy_url: ""
