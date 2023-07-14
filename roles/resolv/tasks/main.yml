@@ -16,9 +16,6 @@
     content: |
       # ANSIBLE MANAGED FILE - wsl-setup
 
-      options rotate
-      options timeout:1
-
       nameserver {{ resolv_nameserver }}
       nameserver {{ resolv_nameserver_fallback }}
       search {{ resolv_search_domains }}
