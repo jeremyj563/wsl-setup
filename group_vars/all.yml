@@ -46,11 +46,13 @@ brew_packages:
   - krew
   - kubectl
   - kubeseal
+  - kustomize
   - nvm
   - openssl
   - pnpm
   - poetry
   - pyenv
+  - terraform
   - tig
 
 # git
