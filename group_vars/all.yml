@@ -45,6 +45,7 @@ brew_packages:
   - helm
   - krew
   - kubectl
+  - kubectx
   - kubeseal
   - kustomize
   - nvm
@@ -98,7 +99,7 @@ resolv_nameserver_fallback: "192.10.0.1"
 resolv_search_domains: jerlyd.com
 
 # proxy
-proxy_url: ""
+proxy_url: http://proxy.rockwellcollins.com:9090
 no_proxy_csv: 0.0.0.0,127.0.0.0/8,172.16.0.0/12,192.168.0.0/16,localhost,local,svc
 
 # shell
