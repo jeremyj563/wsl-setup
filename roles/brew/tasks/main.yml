@@ -1,5 +1,3 @@
 ---
-- import_tasks:
-    file: brew.yml
-- import_tasks:
-    file: packages.yml
+- import_tasks: brew.yml
+- import_tasks: packages.yml
