@@ -63,6 +63,16 @@ git_global_credential_helper: store
 git_global_core_filemode: "false"
 git_global_safe_directory: "*"
 git_global_ssl_verify: "false"
+git_global_aliases:
+  co: checkout
+  cob: checkout -b
+  br: branch
+  brd: branch -D
+  w: worktree
+  wls: worktree list
+  wa: worktree add
+  wrm: worktree remove
+  wmv: worktree move
 
 # krew
 krew_bin_path: "{{ brew_path }}/kubectl-krew"
