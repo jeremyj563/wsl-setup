@@ -1,0 +1,6 @@
+---
+- name: "Set Git global safe.directory to {{ git_global_safe_directory }}"
+  git_config:
+    name: safe.directory
+    scope: global
+    value: "{{ git_global_safe_directory }}"

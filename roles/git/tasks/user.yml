@@ -1,0 +1,12 @@
+---
+- name: "Set Git global user.name to {{ git_global_user_name }}"
+  git_config:
+    name: user.name
+    scope: global
+    value: "{{ git_global_user_name }}"
+
+- name: "Set Git global user.email to {{ git_global_user_email }}"
+  git_config:
+    name: user.email
+    scope: global
+    value: "{{ git_global_user_email }}"

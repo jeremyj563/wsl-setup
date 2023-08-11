@@ -1,36 +1,17 @@
 ---
-- name: "Set Git global user.name to {{ git_global_user_name }}"
-  git_config:
-    name: user.name
-    scope: global
-    value: "{{ git_global_user_name }}"
+- name: Set Git global aliases
+  include_tasks: alias.yml
+  vars:
+    git_config_alias_name: "{{ alias.key  }}"
+    git_config_alias_value: "{{ alias.value }}"
+    git_config_scope: global
+  with_items: "{{ git_global_aliases | dict2items(key_name='key', value_name='value') }}"
+  loop_control:
+    loop_var: alias
+    label: "{{ alias.key }}"
 
-- name: "Set Git global user.email to {{ git_global_user_email }}"
-  git_config:
-    name: user.email
-    scope: global
-    value: "{{ git_global_user_email }}"
-
-- name: "Set Git global credential.helper to {{ git_global_credential_helper }}"
-  git_config:
-    name: credential.helper
-    scope: global
-    value: "{{ git_global_credential_helper }}"
-
-- name: "Set Git global core.fileMode to {{ git_global_core_filemode }}"
-  git_config:
-    name: core.fileMode
-    scope: global
-    value: "{{ git_global_core_filemode }}"
-
-- name: "Set Git global safe.directory to {{ git_global_safe_directory }}"
-  git_config:
-    name: safe.directory
-    scope: global
-    value: "{{ git_global_safe_directory }}"
-
-- name: "Set Git global http.sslVerify to {{ git_global_ssl_verify }}"
-  git_config:
-    name: http.sslVerify
-    scope: global
-    value: "{{ git_global_ssl_verify }}"
+- import_tasks: core.yml
+- import_tasks: credential.yml
+- import_tasks: http.yml
+- import_tasks: safe.yml
+- import_tasks: user.yml

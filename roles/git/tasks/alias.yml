@@ -1,0 +1,6 @@
+---
+- name: "Set Git global alias {{ git_config_alias_name }} = {{ git_config_alias_value }}"
+  git_config:
+    name: "alias.{{ git_config_alias_name }}"
+    scope: "{{ git_config_scope }}"
+    value: "{{ git_config_alias_value }}"
