@@ -25,6 +25,7 @@ apt_packages:
   - python3-pip
   - sudo
   - tmux
+  - tree
   - unzip
   - wget
   - zsh
