@@ -50,6 +50,7 @@ brew_packages:
   - kubeseal
   - kustomize
   - nvm
+  - oh-my-posh
   - openssl
   - pnpm
   - poetry
