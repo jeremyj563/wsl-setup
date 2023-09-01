@@ -1,10 +1,11 @@
 ---
 - debug:
     msg:
-      - "nvm_shell_init_file: {{ nvm_shell_init_file }}"
-      - "nvm_version: {{ nvm_version }}"
+      - "nvm_install_path: {{ nvm_install_path }}"
       - "nvm_node_version: {{ nvm_node_version }}"
       - "nvm_npm_packages: {{ nvm_npm_packages }}"
+      - "nvm_shell_init_file: {{ nvm_shell_init_file }}"
+      - "nvm_version: {{ nvm_version }}"
 
 - name: Install nvm and nodejs
   import_role:

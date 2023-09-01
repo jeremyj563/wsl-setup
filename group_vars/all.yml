@@ -84,9 +84,10 @@ krew_plugins:
   - ingress-nginx
 
 # nvm
+nvm_install_path: "/home/{{ linux_username }}/.nvm"
 nvm_shell_init_file: "/home/{{ linux_username }}/.profile"
-nvm_version: latest
 nvm_node_version: lts
+nvm_version: latest
 nvm_npm_packages:
   - "@nestjs/cli"
   - "@trpc/client"
