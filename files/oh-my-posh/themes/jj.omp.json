@@ -9,7 +9,7 @@
           "foreground": "#000000",
           "leading_diamond": "\ue0b6",
           "style": "diamond",
-          "template": "{{.Icon}} ",
+          "template": "{{ .Icon }} ",
           "type": "os"
         },
         {
@@ -20,16 +20,20 @@
             "style": "folder"
           },
           "style": "powerline",
-          "template": " {{ .Path }} ",
+          "template": " {{ .Path }}",
           "type": "path"
         },
         {
-          "type": "git",
+          "type": "command",
+          "style": "powerline",
+          "powerline_symbol": "\ue0b4",
           "background": "#e3e35e",
           "foreground": "#000000",
-          "powerline_symbol": "\ue0b4",
-          "style": "powerline",
-          "template": " {{ if .IsWorkTree }} {{ .Working }} {{ else }} {{ .HEAD }} {{ end }} "
+          "properties": {
+            "shell": "sh",
+            "command": "git branch --show-current"
+          },
+          "template": " {{ .Output }}"
         },
         {
           "type": "kubectl",
