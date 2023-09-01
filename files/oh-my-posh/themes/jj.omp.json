@@ -5,28 +5,16 @@
       "alignment": "left",
       "segments": [
         {
-          "background": "#ffffff",
+          "background": "#dfdfdf",
           "foreground": "#000000",
           "leading_diamond": "\ue0b6",
           "style": "diamond",
-          "template": " {{ if .WSL }}WSL at {{ end }}{{.Icon}} ",
-          "trailing_diamond": "\ue0b4",
+          "template": "{{.Icon}} ",
           "type": "os"
         },
         {
-          "background": "#0000ff",
+          "background": "#db6c50",
           "foreground": "#000000",
-          "powerline_symbol": "\ue0b4",
-          "properties": {
-            "style": "full"
-          },
-          "style": "powerline",
-          "template": " \uf0e7 ",
-          "type": "root"
-        },
-        {
-          "background": "#0000ff",
-          "foreground": "#ffffff",
           "powerline_symbol": "\ue0b4",
           "properties": {
             "style": "folder"
@@ -36,23 +24,23 @@
           "type": "path"
         },
         {
-          "background": "#D4E157",
+          "type": "git",
+          "background": "#e3e35e",
           "foreground": "#000000",
           "powerline_symbol": "\ue0b4",
           "style": "powerline",
-          "template": " {{ .HEAD }} ",
-          "type": "git"
+          "template": " {{ if .IsWorkTree }} {{ .Working }} {{ else }} {{ .HEAD }} {{ end }} "
         },
         {
           "type": "kubectl",
           "style": "diamond",
-          "leading_diamond": " \ue0b6",
           "trailing_diamond": "\ue0b0",
           "foreground": "#000000",
-          "background": "#ebcc34",
-          "template": "☸ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
+          "background": "#296de8",
+          "template": " ☸ {{.Context}} ",
           "properties": {
-            "context_aliases": {}
+            "context_aliases": {},
+            "parse_kubeconfig": true
           }
         }
       ],
