@@ -50,7 +50,7 @@
           "trailing_diamond": "\ue0b0",
           "foreground": "#000000",
           "background": "#ebcc34",
-          "template": "⎈ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
+          "template": "☸ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
           "properties": {
             "context_aliases": {
               "arn:aws:eks:eu-west-1:1234567890:cluster/posh": "posh"
@@ -100,9 +100,7 @@
       "segments": [
         {
           "foreground": "#D4E157",
-          "foreground_templates": [
-            "{{ if gt .Code 0 }}#FF5252{{ end }}"
-          ],
+          "foreground_templates": ["{{ if gt .Code 0 }}#FF5252{{ end }}"],
           "properties": {
             "always_enabled": true
           },
