@@ -29,7 +29,7 @@
           "foreground": "#ffffff",
           "powerline_symbol": "\ue0b4",
           "properties": {
-            "style": "full"
+            "style": "folder"
           },
           "style": "powerline",
           "template": " {{ .Path }} ",
@@ -42,6 +42,20 @@
           "style": "powerline",
           "template": " {{ .HEAD }} ",
           "type": "git"
+        },
+        {
+          "type": "kubectl",
+          "style": "diamond",
+          "leading_diamond": " \ue0b6",
+          "trailing_diamond": "\ue0b0",
+          "foreground": "#000000",
+          "background": "#ebcc34",
+          "template": "⎈ {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}} ",
+          "properties": {
+            "context_aliases": {
+              "arn:aws:eks:eu-west-1:1234567890:cluster/posh": "posh"
+            }
+          }
         }
       ],
       "type": "prompt"
