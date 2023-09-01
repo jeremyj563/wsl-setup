@@ -11,5 +11,5 @@
     name: stephdewit.nvm
 
 - name: Install global npm packages
-  shell: >
-    /bin/bash -c "source ~/.nvm/nvm.sh && nvm exec default npm install --global {{ nvm_npm_packages | join(' ') }}"
+  shell: >-
+    /bin/bash -c "source ~/.nvm/nvm.sh && nvm exec --lts npm install --global {{ nvm_npm_packages | join(' ') }}"
