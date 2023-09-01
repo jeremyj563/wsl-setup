@@ -13,4 +13,4 @@
 
 - name: Install global npm packages
   shell: >-
-    /bin/bash -c "source ~/.nvm/nvm.sh && nvm exec --lts npm install --global {{ nvm_npm_packages | join(' ') }}"
+    /bin/bash -c "source {{ nvm_install_path }}/nvm.sh && nvm exec --lts npm install --global {{ nvm_npm_packages | join(' ') }}"
