@@ -40,10 +40,10 @@ brew_packages:
   - argocd-autopilot
   - Azure/kubelogin/kubelogin
   - bat
-  - derailed/k9s/k9s
   - gh
   - git
   - helm
+  - k9s
   - krew
   - kubectl
   - kubectx
