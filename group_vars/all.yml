@@ -123,6 +123,7 @@ bashrc_scripts:
   - krew.sh
   - kubectl-aliases.sh
   - kubectl-completion.sh
+  - oh-my-posh.sh
   - ssh.sh
 
 # workspace
