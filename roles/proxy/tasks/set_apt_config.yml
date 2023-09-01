@@ -2,7 +2,7 @@
 - name: Set proxy config in /etc/apt/apt.conf.d/05proxy
   become: true
   blockinfile:
-    path: "Configure /etc/apt/apt.conf.d/05proxy"
+    path: "/etc/apt/apt.conf.d/05proxy"
     create: true
     mode: "0644"
     owner: root
