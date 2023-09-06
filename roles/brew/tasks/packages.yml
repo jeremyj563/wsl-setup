@@ -1,5 +1,5 @@
 ---
-- name: Install brew packages
+- name: Install and upgrade brew packages
   community.general.homebrew:
     path: "{{ brew_path }}"
     name: "{{ brew_packages }}"
