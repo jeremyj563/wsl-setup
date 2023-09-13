@@ -56,8 +56,6 @@
         remote_src: true
 
 - name: Check `kubectl-krew` is present
-  become: true
-  become_user: "{{ krew_user }}"
   changed_when: false
   ignore_errors: true
   stat:
@@ -65,8 +63,6 @@
   register: file_data
 
 - name: Manage Krew Plugins
-  become: true
-  become_user: "{{ krew_user }}"
   when: krew_plugins is defined and file_data.stat.exists == true
   block:
     - name: Update Krew Index
