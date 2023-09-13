@@ -5,3 +5,5 @@
     name: "{{ brew_packages }}"
     update_homebrew: true
     upgrade_all: true
+  environment:
+    HOMEBREW_NO_ANALYTICS: 1
