@@ -4,4 +4,4 @@
     name: markosamuli.linuxbrew
   vars:
     linuxbrew_use_installer: true
-    linuxbrew_install_checksum: sha1:e5de3752fea0790e3c8c992617698ce32986bf75
+    linuxbrew_install_checksum: sha1:1c69dd66df17a42133adf085dc8725f530bbdf7a
