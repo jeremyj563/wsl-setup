@@ -10,6 +10,8 @@
 - name: Install nvm and nodejs
   import_role:
     name: stephdewit.nvm
+  environment:
+    NVM_DIR: '{{ nvm_install_path }}'
 
 - name: Install global npm packages
   shell: >-
