@@ -121,6 +121,7 @@ bashrc_scripts:
   - aliases.sh
   - ansible.sh
   - brew.sh
+  - curl.sh
   - history.sh
   - krew.sh
   - kubectl-aliases.sh
