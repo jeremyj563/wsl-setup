@@ -9,6 +9,7 @@ apt_packages:
   - dnsutils
   - fzf
   - gcc
+  - gnutls-bin
   - iputils-ping
   - jq
   - krb5-user
@@ -102,8 +103,8 @@ pip_packages:
   - boto3>=1.26.155
   - bs4>=0.0.1
   - kubernetes>=26.1.0
-  - pykerberos==1.2.4
-  - pyvmomi==7.0.3
+  # - pykerberos==1.2.4
+  # - pyvmomi==7.0.3
   - requests>=2.31.0
 
 # resolv
