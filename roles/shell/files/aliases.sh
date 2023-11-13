@@ -32,5 +32,5 @@ alias apc='echo $AWS_PROFILE'
 alias api='aws sts get-caller-identity'
 
 # kubectl
-alias kctx='kubectl config use-context $(kubectl config get-contexts -o name | fzf --height=10 --prompt="Kubernetes Context> ")'
+alias kctx='kubectl config use-context $(kubectl config get-contexts -o name | fzf --height=10 --prompt="Kubernetes Context> ") > /dev/null 2>&1'
 alias kcns='kubectl config set-context --current --namespace "$(kubectl get ns -o name | fzf -d/ --with-nth=2 | cut -d/ -f2)"'
