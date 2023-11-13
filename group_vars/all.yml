@@ -90,12 +90,7 @@ nvm_shell_init_file: "/home/{{ linux_username }}/.profile"
 nvm_node_version: lts
 nvm_version: latest
 nvm_npm_packages:
-  - "@nestjs/cli"
-  - "@trpc/client"
-  - "@trpc/server"
   - dotenv-cli
-  - vtop
-  - yo
 
 # pip
 pip_packages:
