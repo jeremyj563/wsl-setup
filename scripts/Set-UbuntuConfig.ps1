@@ -36,6 +36,9 @@ Function that provisions and configures a development environment on an Ubuntu d
 .PARAMETER SetDefault
 [switch] Set the distribution as default once configured
 
+.PARAMETER NoTerminate
+[switch] Do not terminate distribution after applying the configuration
+
 .INPUTS
 None. You cannot pipe objects to Set-UbuntuConfig
 
@@ -46,8 +49,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 9-19-2022
-Version: 1.1.6
+Date Updated: 11-13-2023
+Version: 1.1.7
 
 .LINK
 Official WSL distribution download links:
@@ -115,7 +118,11 @@ function Set-UbuntuConfig {
 
         [Parameter(Mandatory=$false)]
         [Alias('s')]
-        [switch] $SetDefault = $false
+        [switch] $SetDefault = $false,
+
+        [Parameter(Mandatory=$false)]
+        [Alias('t')]
+        [switch] $NoTerminate = $false
     )
 
     begin {
@@ -180,7 +187,9 @@ function Set-UbuntuConfig {
             }
         }
         function Stop-UbuntuDistro {
-            Start-Process -FilePath wsl.exe -ArgumentList "--terminate $DistroName" -NoNewWindow -Wait
+            if (-not $NoTerminate) {
+                Start-Process -FilePath wsl.exe -ArgumentList "--terminate $DistroName" -NoNewWindow -Wait
+            }
         }
         function Test-ExistingDistro {
             $distros = wsl.exe --list
