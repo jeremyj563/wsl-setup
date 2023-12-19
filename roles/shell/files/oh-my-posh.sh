@@ -4,7 +4,7 @@ eval "$(oh-my-posh init bash --config 'https://raw.githubusercontent.com/jeremyj
 
 alias omp='oh-my-posh'
 function p() {
-    for segment in command kubectl os path time; do
+    for segment in command kubectl os path time go python; do
         oh-my-posh toggle $segment
     done
 }
