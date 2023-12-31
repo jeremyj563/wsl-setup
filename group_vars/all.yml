@@ -41,6 +41,7 @@ brew_packages:
   - argocd-autopilot
   - Azure/kubelogin/kubelogin
   - bat
+  - devspace
   - gh
   - git
   - helm
