@@ -91,6 +91,7 @@ nvm_node_version: lts
 nvm_version: latest
 nvm_npm_packages:
   - dotenv-cli
+  - node-gyp
 
 # pip
 pip_packages:
