@@ -45,6 +45,7 @@ brew_packages:
   - gh
   - git
   - helm
+  - jsonnet
   - k9s
   - krew
   - kubectl
