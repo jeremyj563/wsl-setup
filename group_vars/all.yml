@@ -29,7 +29,6 @@ apt_packages:
   - tree
   - unzip
   - wget
-  - yq
   - zsh
 
 # brew
