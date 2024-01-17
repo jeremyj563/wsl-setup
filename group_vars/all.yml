@@ -60,6 +60,7 @@ brew_packages:
   - pyenv
   - terraform
   - tig
+  - yq
 
 # git
 git_global_user_name: Jeremy Johnson
