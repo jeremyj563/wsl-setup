@@ -105,6 +105,7 @@ pip_packages:
   # - pykerberos==1.2.4
   # - pyvmomi==7.0.3
   - requests>=2.31.0
+  - toml>=0.10.0
 
 # resolv
 resolv_nameserver: "10.0.2.11"
