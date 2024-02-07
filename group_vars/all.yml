@@ -86,6 +86,7 @@ krew_version: latest
 krew_user: "{{ linux_username }}"
 krew_plugins:
   - ingress-nginx
+  - resource-capacity
 
 # nvm
 nvm_install_path: "/home/{{ linux_username }}/.nvm"
