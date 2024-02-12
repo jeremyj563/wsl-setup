@@ -1,6 +1,7 @@
 ---
 # apt
 apt_packages:
+  - apache2-utils
   - apt-file
   - apt-transport-https
   - bash-completion
