@@ -62,6 +62,7 @@ brew_packages:
   - pipx
   - poetry
   - pyenv
+  - pyenv-virtualenv
   - terraform
   - tig
   - yq
