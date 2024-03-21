@@ -59,6 +59,7 @@ brew_packages:
   - oh-my-posh
   - openssl
   - pnpm
+  - pipx
   - poetry
   - pyenv
   - terraform
