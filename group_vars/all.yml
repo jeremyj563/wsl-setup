@@ -133,6 +133,7 @@ bashrc_scripts:
   - kubectl-aliases.sh
   - kubectl-completion.sh
   - oh-my-posh.sh
+  - pyenv.sh
   - ssh.sh
 
 # workspace
