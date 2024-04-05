@@ -43,6 +43,7 @@ brew_packages:
   - Azure/kubelogin/kubelogin
   - bat
   - clusterctl
+  - cue
   - devspace
   - gh
   - git
@@ -63,6 +64,7 @@ brew_packages:
   - poetry
   - pyenv
   - pyenv-virtualenv
+  - stefanprodan/tap/timoni
   - terraform
   - tig
   - yq
