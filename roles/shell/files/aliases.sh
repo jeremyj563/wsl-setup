@@ -34,6 +34,7 @@ alias api='aws sts get-caller-identity'
 # kubectl
 alias kctx='kubectl config use-context $(kubectl config get-contexts -o name | fzf --height=10 --prompt="Kubernetes Context> ") > /dev/null 2>&1'
 alias kcns='kubectl config set-context --current --namespace "$(kubectl get ns -o name | fzf -d/ --with-nth=2 | cut -d/ -f2)"'
+alias kcred='FZF_KUBECTL_USER=$(kubectl config view --template="{{ range .users }}{{ printf \"%s\n\" .name }}{{ end }}" | fzf --height=10 --prompt="Kubernetes User> ") && read -p "token: " FZF_KUBECTL_TOKEN && kubectl config set-credentials $FZF_KUBECTL_USER --token=$FZF_KUBECTL_TOKEN'
 
 # pyenv
 alias pyls='pyenv virtualenvs'
