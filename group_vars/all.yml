@@ -65,6 +65,7 @@ brew_packages:
   - pyenv
   - pyenv-virtualenv
   - stefanprodan/tap/timoni
+  - teller
   - terraform
   - tig
   - yq
