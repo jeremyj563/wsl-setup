@@ -1,0 +1,6 @@
+---
+- name: Tap brew repositories
+  community.general.homebrew_tap:
+    name: "{{ brew_repos }}"
+  environment:
+    HOMEBREW_NO_ANALYTICS: 1

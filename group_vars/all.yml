@@ -37,6 +37,9 @@ linuxbrew_install_tmp: /tmp/linuxbrew
 linuxbrew_install_url: https://raw.githubusercontent.com/Homebrew/install/master/install.sh
 brew_path: /home/linuxbrew/.linuxbrew/bin
 brew_bin_path: "{{ brew_path }}/brew"
+brew_repos:
+  - Azure/kubelogin
+  - stefanprodan/tap
 brew_packages:
   - argocd
   - argocd-autopilot
