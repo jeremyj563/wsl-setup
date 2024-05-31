@@ -4,6 +4,8 @@
     name: "{{ linux_username }}"
     password: "{{ linux_password | password_hash('sha256') }}"
     uid: 1000
+    create_home: true
+    home: /home/{{ linux_username }}
     shell: /bin/bash
     groups:
       - adm
