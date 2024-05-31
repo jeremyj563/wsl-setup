@@ -40,7 +40,7 @@ brew_bin_path: "{{ brew_path }}/brew"
 brew_packages:
   - argocd
   - argocd-autopilot
-  - Azure/kubelogin/kubelogin
+  - az-kubelogin
   - bat
   - clusterctl
   - cue
@@ -64,7 +64,7 @@ brew_packages:
   - poetry
   - pyenv
   - pyenv-virtualenv
-  - stefanprodan/tap/timoni
+  - timoni
   - teller
   - terraform
   - tig
