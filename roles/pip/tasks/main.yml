@@ -1,4 +1,15 @@
 ---
+- name: Set /home/{{ linux_username }}/.config/pip/pip.conf
+  blockinfile:
+    path: /home/{{ linux_username }}/.config/pip/pip.conf
+    create: true
+    mode: "664"
+    owner: "{{ linux_username }}"
+    group: "{{ linux_username }}"
+    block: |
+      [global]
+      break-system-packages = true
+
 - name: Install pip packages
   pip:
     name: "{{ pip_packages }}"
