@@ -49,8 +49,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 11-13-2023
-Version: 1.1.7
+Date Updated: 5-31-2024
+Version: 1.2.0
 
 .LINK
 Official WSL distribution download links:
