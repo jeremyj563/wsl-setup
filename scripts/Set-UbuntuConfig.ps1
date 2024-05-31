@@ -90,11 +90,11 @@ function Set-UbuntuConfig {
 
         [Parameter(Mandatory=$false)]
         [Alias('u')]
-        [string] $DistroUri = 'https://wsldownload.azureedge.net/Ubuntu.2020.424.0_x64.appx',
+        [string] $DistroUri = 'https://wslstorestorage.blob.core.windows.net/wslblob/Ubuntu2204LTS-230518_x64.appx',
 
         [Parameter(Mandatory=$false)]
         [Alias('h')]
-        [string] $DistroSha = '5FBD489AC156279E0D6E3448E0070C3E3DDF3A062E14E60CAAA2C68BE78E0130',
+        [string] $DistroSha = '6A723A25AC7A072238FAC386A8AB3D425B84F9FD806F01104D4D0C4D5E5F42FE',
 
         [Parameter(Mandatory=$false)]
         [Alias('l')]
