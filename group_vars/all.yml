@@ -64,7 +64,7 @@ brew_packages:
   - poetry
   - pyenv
   - pyenv-virtualenv
-  - stefanprodan/tap/timoni
+  - timoni
   - teller
   - terraform
   - tig
