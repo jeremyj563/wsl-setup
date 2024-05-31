@@ -1,5 +1,5 @@
 ---
 - src: stephdewit.nvm # https://github.com/stephdewit/ansible-nvm
-  version: v3.4.0
+  version: v3.4.3
 - src: markosamuli.linuxbrew # https://github.com/markosamuli/ansible-linuxbrew
   version: v2.0.2
