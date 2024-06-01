@@ -1,7 +1,7 @@
 # PS > $distroName = '<distro-name>'
 # PS > Set-UbuntuConfig -DistroName $distroName -NewDistroOnly
-# PS > wsl -d $distroName -u root
-# ~# bash source/repos.personal/jeremyj563/wsl-setup/scripts/collins-pre-bootstrap.sh
+# PS > $scriptPath = wsl -d $distroName -u root -e wslpath $env:USERPROFILE/source/repos.personal/jeremyj563/wsl-setup/scripts/collins-pre-bootstrap.sh
+# PS > wsl -d $distroName -u root -e bash $scriptPath
 # PS > Set-UbuntuConfig -DistroName $distroName -ForceBootstrap
 
 #!/bin/bash
