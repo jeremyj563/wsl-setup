@@ -21,5 +21,6 @@
 - name: Source all scripts in /home/{{ linux_username }}/.bashrc.d
   blockinfile:
     path: /home/{{ linux_username }}/.bashrc
+    marker: "# ANSIBLE MANAGED BLOCK - wsl-setup"
     block: |
       for f in ~/.bashrc.d/*.sh; do source $f; done

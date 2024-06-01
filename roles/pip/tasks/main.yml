@@ -6,6 +6,7 @@
     mode: "664"
     owner: "{{ linux_username }}"
     group: "{{ linux_username }}"
+    marker: "# ANSIBLE MANAGED BLOCK - wsl-setup"
     block: |
       [global]
       break-system-packages = true

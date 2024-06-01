@@ -7,5 +7,6 @@
     mode: "0644"
     owner: root
     group: root
+    marker: "# ANSIBLE MANAGED BLOCK - wsl-setup"
     block: |
       Acquire::http::Proxy "{{ proxy_url }}";
