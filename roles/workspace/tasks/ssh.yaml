@@ -1,4 +1,9 @@
 ---
+- name: Check if OpenSSH private key already exists [/home/{{ linux_username }}/.ssh/id_{{ workspace_ssh_keypair_type }}]
+  stat:
+    path: /home/{{ linux_username }}/.ssh/id_{{ workspace_ssh_keypair_type }}
+  register: stat_keypair
+
 - name: Generate an OpenSSH keypair of type {{ workspace_ssh_keypair_type }}
   community.crypto.openssh_keypair:
     path: /home/{{ linux_username }}/.ssh/id_{{ workspace_ssh_keypair_type }}
@@ -7,3 +12,4 @@
     group: "{{ linux_username }}"
     force: false
     mode: 600
+  when: not stat_keypair.stat.exists
