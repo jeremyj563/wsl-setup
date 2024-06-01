@@ -1,5 +1,5 @@
 ---
-- name: Generate an OpenSSH keypair of type {{ ssh.keypair_type }}
+- name: Generate an OpenSSH keypair of type {{ workspace_ssh_keypair_type }}
   community.crypto.openssh_keypair:
-    path: /home/{{ linux_username }}/.ssh/id_ed25519
-    type: "{{ ssh.keypair_type }}"
+    path: /home/{{ linux_username }}/.ssh/id_{{ workspace_ssh_keypair_type }}
+    type: "{{ workspace_ssh_keypair_type }}"
