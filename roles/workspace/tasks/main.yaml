@@ -7,3 +7,4 @@
     dotfiles_repo: "{{ workspace_repos | selectattr('name', '==', 'dotfiles') | first }}"
 
 - import_tasks: dirs.yaml
+- import_tasks: ssh.yaml
