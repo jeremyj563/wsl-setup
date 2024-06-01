@@ -53,7 +53,7 @@ Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
 Date Updated: 5-31-2024
-Version: 1.2.2
+Version: 1.2.3
 
 .LINK
 Official WSL distribution download links:
@@ -213,7 +213,7 @@ function Set-UbuntuConfig {
         }
         function Start-DistroConfig {
             Set-ScriptVars
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-galaxy install -r ""$script:root/../requirements.yml""" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-galaxy install -r ""$script:root/../requirements.yml"" --force" -NoNewWindow -Wait
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-playbook ""$script:root/../playbook-wsl-config.yml"" -e ""linux_username=$($script:cred.UserName) linux_password=$($script:cred.Password)""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
