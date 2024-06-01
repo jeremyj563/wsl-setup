@@ -27,6 +27,9 @@ Function that provisions and configures a development environment on an Ubuntu d
 .PARAMETER NewDistro
 [switch] Provision and configure a new distribution
 
+.PARAMETER NewDistroOnly
+[switch] Run the distro creation process then skip bootstrapping
+
 .PARAMETER BootstrapOnly
 [switch] Run the bootstrap process then skip configuring the distribution
 
@@ -50,7 +53,7 @@ Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
 Date Updated: 5-31-2024
-Version: 1.2.0
+Version: 1.2.1
 
 .LINK
 Official WSL distribution download links:
@@ -107,6 +110,10 @@ function Set-UbuntuConfig {
         [Parameter(Mandatory=$false)]
         [Alias('n')]
         [switch] $NewDistro = $false,
+
+        [Parameter(Mandatory=$false)]
+        [Alias('o')]
+        [switch] $NewDistroOnly = $false,
 
         [Parameter(Mandatory=$false)]
         [Alias('b')]
@@ -225,13 +232,16 @@ function Set-UbuntuConfig {
     }
 
     process {
-        if ($NewDistro) {
+        if ($NewDistroOnly) {
+            New-UbuntuDistro
+        } elseif ($NewDistro) {
             New-UbuntuDistro
             Start-DistroBootstrap
         } elseif ($ForceBootstrap) {
             Test-ExistingDistro
             Start-DistroBootstrap
         }
+
         if (-not $BootstrapOnly) {
             Start-DistroConfig
         }
