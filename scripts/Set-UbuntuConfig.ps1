@@ -53,7 +53,7 @@ Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
 Date Updated: 5-31-2024
-Version: 1.2.1
+Version: 1.2.2
 
 .LINK
 Official WSL distribution download links:
@@ -242,7 +242,7 @@ function Set-UbuntuConfig {
             Start-DistroBootstrap
         }
 
-        if (-not $BootstrapOnly) {
+        if (-not ($NewDistroOnly -or $BootstrapOnly)) {
             Start-DistroConfig
         }
     }
