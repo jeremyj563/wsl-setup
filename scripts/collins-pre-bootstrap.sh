@@ -1,3 +1,9 @@
+# PS > $distroName = '<distro-name>'
+# PS > Set-UbuntuConfig -DistroName $distroName -NewDistroOnly
+# PS > wsl -d $distroName -u root
+# ~# bash source/repos.personal/jeremyj563/wsl-setup/scripts/collins-pre-bootstrap.sh
+# PS > Set-UbuntuConfig -DistroName $distroName -ForceBootstrap
+
 #!/bin/bash
 
 rm -rf /etc/resolv.conf || true
