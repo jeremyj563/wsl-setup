@@ -5,6 +5,3 @@
 - include_tasks:
     file: set_apt_config.yml
   when: proxy_url != ""
-- include_tasks:
-    file: set_env_vars.yml
-  when: proxy_url != ""
