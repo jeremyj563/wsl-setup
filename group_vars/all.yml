@@ -156,6 +156,7 @@ workspace_repos:
     dir: jmjohnson85
   - name: proxy-switcher
     url: https://github.com/jeremyj563/proxy-switcher.git
+workspace_ssh_keypair_type: ed25519
 workspace_touch_dirs:
   - /home/{{ linux_username }}/.aws
-workspace_ssh_keypair_type: ed25519
+  - /home/{{ linux_username }}/.ssh

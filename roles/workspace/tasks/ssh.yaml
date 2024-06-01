@@ -3,3 +3,7 @@
   community.crypto.openssh_keypair:
     path: /home/{{ linux_username }}/.ssh/id_{{ workspace_ssh_keypair_type }}
     type: "{{ workspace_ssh_keypair_type }}"
+    owner: "{{ linux_username }}"
+    group: "{{ linux_username }}"
+    force: false
+    mode: 600
