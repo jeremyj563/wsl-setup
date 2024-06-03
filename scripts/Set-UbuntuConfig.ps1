@@ -24,6 +24,9 @@ Function that provisions and configures a development environment on an Ubuntu d
 .PARAMETER InstallPath
 [string] Optional path of where to store the distribution's Hyper-V hard disk files
 
+.PARAMETER TargetDomain
+[string] Optional target domain to pass as extra var in ansible playbook invocation
+
 .PARAMETER NewDistro
 [switch] Provision and configure a new distribution
 
@@ -52,8 +55,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 5-31-2024
-Version: 1.2.3
+Date Updated: 6-3-2024
+Version: 1.2.4
 
 .LINK
 Official WSL distribution download links:
@@ -108,6 +111,10 @@ function Set-UbuntuConfig {
         [string] $InstallPath = "$env:USERPROFILE\wsl\$DistroName",
 
         [Parameter(Mandatory=$false)]
+        [Alias('m')]
+        [string] $TargetDomain,
+
+        [Parameter(Mandatory=$false)]
         [Alias('n')]
         [switch] $NewDistro = $false,
 
@@ -143,6 +150,11 @@ function Set-UbuntuConfig {
         }
         function Set-ScriptVars {
             $script:cred = $LinuxCredential.GetNetworkCredential()
+            $script:extraVars = "linux_username='$($script:cred.UserName)' "
+            $script:extraVars += "linux_password='$($script:cred.Password)' "
+            if ($TargetDomain) {
+                $script:extraVars += "target_domain='${TargetDomain}' "
+            }
             $script:root = wsl.exe -d $DistroName -u root -e wslpath $PSScriptRoot
             Test-LastExitCode -Message $script:root
         }
@@ -208,13 +220,13 @@ function Set-UbuntuConfig {
         function Start-DistroBootstrap {
             Set-ScriptVars
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ""$script:root/install-ansible.sh""" -NoNewWindow -Wait
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook ""$script:root/../playbook-wsl-bootstrap.yml"" -e ""linux_username=$($script:cred.UserName) linux_password=$($script:cred.Password)""" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook ""$script:root/../playbook-wsl-bootstrap.yml"" -e ""${script:extraVars}""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
         function Start-DistroConfig {
             Set-ScriptVars
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-galaxy install -r ""$script:root/../requirements.yml"" --force" -NoNewWindow -Wait
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-playbook ""$script:root/../playbook-wsl-config.yml"" -e ""linux_username=$($script:cred.UserName) linux_password=$($script:cred.Password)""" -NoNewWindow -Wait
+            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-playbook ""$script:root/../playbook-wsl-config.yml"" -e ""${script:extraVars}""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
         function New-UbuntuDistro {
