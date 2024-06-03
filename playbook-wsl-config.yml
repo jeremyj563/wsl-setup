@@ -1,9 +1,5 @@
 # EXAMPLE:
 # ansible-playbook playbook-wsl-config.yml
-#
-# ansible-playbook playbook-wsl-config.yml -e "linux_username=wsl"
-#
-# ansible-playbook playbook-wsl-config.yml -e "linux_username=wsl linux_password=<password>"
 ---
 - hosts: localhost
   gather_facts: false

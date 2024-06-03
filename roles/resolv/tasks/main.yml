@@ -1,4 +1,15 @@
 ---
+- name: Include vars based on target domain [{{ target_domain }}]
+  include_vars:
+    dir: vars/{{ target_domain }}
+
+- name: Print required vars for current role [{{ role_name }}]
+  debug:
+    msg:
+    - "resolv_nameserver: {{ resolv_nameserver }}"
+    - "resolv_nameserver_fallback: {{ resolv_nameserver_fallback }}"
+    - "resolv_search_domains: {{ resolv_search_domains }}"
+
 - name: Unlink /etc/resolv.conf
   become: true
   file:
