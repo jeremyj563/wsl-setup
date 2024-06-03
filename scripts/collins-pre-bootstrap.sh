@@ -11,7 +11,7 @@ rm -rf /etc/resolv.conf || true
 echo '## BEGIN added by ansible (wsl-setup)
 nameserver 10.198.0.199
 nameserver 10.199.0.199
-search rockwellcollins.com mshome.
+search rockwellcollins.com mshome.net
 ## END added by ansible (wsl-setup)
 ' >/etc/resolv.conf
 
