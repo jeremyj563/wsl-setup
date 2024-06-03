@@ -6,6 +6,7 @@
 # ansible-playbook playbook-wsl-config.yml -e "linux_username=wsl linux_password=<password>"
 ---
 - hosts: localhost
+  gather_facts: false
   vars_prompt:
     - name: linux_username
       prompt: "Linux username"
