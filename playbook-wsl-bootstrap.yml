@@ -3,7 +3,6 @@
 # ansible-playbook playbook-wsl-bootstrap.yml -e "target_domain=collins.com"
 ---
 - hosts: localhost
-  gather_facts: false
   vars_prompt:
     - name: linux_username
       prompt: "Linux username"
