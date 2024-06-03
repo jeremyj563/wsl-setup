@@ -24,6 +24,7 @@ apt_packages:
   - net-tools
   - openssh-client
   - openssh-server
+  - p7zip-full
   - python3-pip
   - sudo
   - tmux
@@ -121,9 +122,9 @@ pip_packages:
   - toml>=0.10.0
 
 # resolv
-resolv_nameserver: "10.0.2.11"
-resolv_nameserver_fallback: "192.10.0.1"
-resolv_search_domains: jerlyd.com
+resolv_nameserver: "10.198.0.199"
+resolv_nameserver_fallback: "10.199.0.199"
+resolv_search_domains: rockwellcollins.com mshome.net
 
 # proxy
 proxy_url: http://proxy.rockwellcollins.com:9090
