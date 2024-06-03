@@ -7,7 +7,7 @@
     group: root
     mode: "0644"
     content: |
-      # ANSIBLE MANAGED FILE - wsl-setup
+      ## ansible managed file (wsl-setup)
 
       [user]
       default = {{ linux_username }}

@@ -18,7 +18,7 @@
     group: "{{ linux_username }}"
     mode: "0644"
     content: |
-      # ANSIBLE MANAGED FILE - wsl-setup
+      # created by ansible (wsl-setup)
       ---
       k9s:
         refreshRate: 2

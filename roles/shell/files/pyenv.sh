@@ -1,4 +1,4 @@
-# ANSIBLE MANAGED FILE - wsl-setup
+## ansible managed file (wsl-setup)
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"

@@ -14,7 +14,7 @@
     mode: "0644"
     attr: +i
     content: |
-      # ANSIBLE MANAGED FILE - wsl-setup
+      ## ansible managed file (wsl-setup)
 
       nameserver {{ resolv_nameserver }}
       nameserver {{ resolv_nameserver_fallback }}
