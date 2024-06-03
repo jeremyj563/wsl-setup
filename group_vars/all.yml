@@ -40,6 +40,7 @@ brew_path: /home/linuxbrew/.linuxbrew/bin
 brew_bin_path: "{{ brew_path }}/brew"
 brew_repos:
   - Azure/kubelogin
+  - loft-sh/tap
   - stefanprodan/tap
 brew_packages:
   - argocd
@@ -60,6 +61,7 @@ brew_packages:
   - kubectx
   - kubeseal
   - kustomize
+  - loft-sh/tap/vcluster-experimental
   - nvm
   - oh-my-posh
   - openssl
