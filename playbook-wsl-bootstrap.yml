@@ -13,8 +13,10 @@
       private: yes
   vars:
     ansible_become_password: "{{ linux_password }}"
+    target_domain: "{{ default_target_domain }}"
   roles:
-    - proxy
+    - role: proxy
+      when: target_domain in proxy_domains
     - user
     - wsl
     - resolv

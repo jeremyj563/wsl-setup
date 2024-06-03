@@ -1,7 +1,18 @@
 ---
+- name: Include vars by target domain [{{ target_domain }}]
+  include_vars:
+    dir: vars/{{ target_domain }}
+
+- name: Print required vars for role [{{ role_name }}]
+  debug:
+    msg:
+    - "proxy_url: {{ proxy_url }}"
+    - "no_proxy_csv: {{ no_proxy_csv }}"
+
 - include_tasks:
     file: set_rc_conf.yml
   when: proxy_url != ""
+
 - include_tasks:
     file: set_apt_config.yml
   when: proxy_url != ""

@@ -1,0 +1,2 @@
+proxy_url: http://proxy.rockwellcollins.com:9090
+no_proxy_csv: 0.0.0.0,127.0.0.0/8,10.0.0.0/8,172.0.0.0/8,192.168.0.0/16,localhost,local,internal,svc,mshome.net,rockwellcollins.lab,wg1.aws.ray.com,%2Fpipe%2FdockerDesktopWindowsEngine
