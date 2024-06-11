@@ -79,6 +79,7 @@ brew_packages:
   - terraform
   - tig
   - yq
+  - zx
 
 # git
 git_global_user_name: Jeremy Johnson
