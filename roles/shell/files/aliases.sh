@@ -44,4 +44,4 @@ alias pya='pyenv activate'
 alias pyd='pyenv deactivate'
 
 # tmux
-alias start-tmux='npx zx $REPOS/scripts/js/start-tmux.mjs'
+alias start-tmux='npx -y zx $REPOS/scripts/js/start-tmux.mjs'
