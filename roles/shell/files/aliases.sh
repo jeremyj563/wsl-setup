@@ -24,6 +24,7 @@ alias ports='netstat -tulanp'
 alias upgrade='sudo apt update && sudo apt full-upgrade'
 
 # aws
+alias login-awsprofile='python3 $REPOS/scripts/py/Py3AWSTokenRequest.py -e $AWS_PROFILE'
 alias a='awsv2'
 alias aws='awsv2'
 alias apls='aws configure list-profiles'
@@ -41,3 +42,6 @@ alias pyls='pyenv virtualenvs'
 alias pyc='pyenv virtualenv'
 alias pya='pyenv activate'
 alias pyd='pyenv deactivate'
+
+# tmux
+alias start-tmux='npx zx $REPOS/scripts/js/start-tmux.mjs'
