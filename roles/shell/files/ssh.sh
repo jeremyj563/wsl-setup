@@ -1,4 +1,4 @@
-## ansible managed file (wsl-setup)
+## ANSIBLE MANAGED FILE: wsl-setup
 
 chmod 700 "$HOME/.ssh" 2>/dev/null
 find "$HOME/.ssh" -type f -name '*.pub' -exec chmod 1130 {} \;

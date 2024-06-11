@@ -1,4 +1,4 @@
-## ansible managed file (wsl-setup)
+## ANSIBLE MANAGED FILE: wsl-setup
 
 # general
 alias reload!='. ~/.bashrc'

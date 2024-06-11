@@ -8,12 +8,12 @@
 
 rm -rf /etc/resolv.conf || true
 
-echo '## ansible managed file (wsl-setup)
+echo '## ANSIBLE MANAGED FILE: wsl-setup
 nameserver 10.198.0.199
 nameserver 10.199.0.199
 search rockwellcollins.com mshome.net' >/etc/resolv.conf
 
-echo '## ansible managed file (wsl-setup)
+echo '## ANSIBLE MANAGED FILE: wsl-setup
 [user]
 default = wsl
 
@@ -23,6 +23,6 @@ generateResolvConf = false
 [automount]
 options = "metadata"' >/etc/wsl.conf
 
-echo '## BEGIN added by ansible (wsl-setup)
+echo '## BEGIN ANSIBLE MANAGED BLOCK: wsl-setup
 Acquire::http::Proxy "http://proxy.rockwellcollins.com:9090";
-## END added by ansible (wsl-setup)' >/etc/apt/apt.conf.d/05proxy
+## END ANSIBLE MANAGED BLOCK: wsl-setup' >/etc/apt/apt.conf.d/05proxy

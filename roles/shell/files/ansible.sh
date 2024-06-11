@@ -1,3 +1,3 @@
-## ansible managed file (wsl-setup)
+## ANSIBLE MANAGED FILE: wsl-setup
 
 export ANSIBLE_HOST_KEY_CHECKING=False

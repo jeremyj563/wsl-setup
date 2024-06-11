@@ -3,7 +3,7 @@
   blockinfile:
     path: "{{ ansible_env.HOME }}/.bashrc"
     create: true
-    marker: "## {mark} added by ansible (wsl-setup)"
+    marker: "## {mark} ANSIBLE MANAGED BLOCK: wsl-setup"
     block: |
       export HTTP_PROXY="{{ proxy_url }}"
       export HTTPS_PROXY="{{ proxy_url }}"
@@ -16,7 +16,7 @@
   blockinfile:
     path: "/home/{{ linux_username }}/.bashrc"
     create: true
-    marker: "## {mark} added by ansible (wsl-setup)"
+    marker: "## {mark} ANSIBLE MANAGED BLOCK: wsl-setup"
     block: |
       export HTTP_PROXY="{{ proxy_url }}"
       export HTTPS_PROXY="{{ proxy_url }}"

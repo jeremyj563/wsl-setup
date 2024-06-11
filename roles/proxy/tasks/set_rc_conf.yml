@@ -7,7 +7,7 @@
     mode: "0644"
     owner: root
     group: root
-    marker: "## {mark} added by ansible (wsl-setup)"
+    marker: "## {mark} ANSIBLE MANAGED BLOCK: wsl-setup"
     block: |
       rc_env_allow="*"
       export HTTP_PROXY="{{ proxy_url }}"
