@@ -39,6 +39,12 @@ Function that provisions and configures a development environment on an Ubuntu d
 .PARAMETER ForceBootstrap
 [switch] Run the bootstrap process on an already provisioned distribution
 
+.PARAMETER SkipAnsibleInstall
+[switch] Skip running the Ansible install script
+
+.PARAMETER SkipGalaxyInstall
+[switch] Skip running the Ansible Galaxy requirements installation
+
 .PARAMETER SetDefault
 [switch] Set the distribution as default once configured
 
@@ -55,8 +61,8 @@ None.
 Name: Set-UbuntuConfig.ps1
 Author: Jeremy Johnson
 Date Created: 7-18-2022
-Date Updated: 6-3-2024
-Version: 1.2.4
+Date Updated: 6-11-2024
+Version: 1.2.5
 
 .LINK
 Official WSL distribution download links:
@@ -129,6 +135,14 @@ function Set-UbuntuConfig {
         [Parameter(Mandatory=$false)]
         [Alias('f')]
         [switch] $ForceBootstrap = $false,
+
+        [Parameter(Mandatory=$false)]
+        [Alias('a')]
+        [switch] $SkipAnsibleInstall = $false,
+
+        [Parameter(Mandatory=$false)]
+        [Alias('g')]
+        [switch] $SkipGalaxyInstall = $false,
 
         [Parameter(Mandatory=$false)]
         [Alias('s')]
@@ -219,13 +233,17 @@ function Set-UbuntuConfig {
         }
         function Start-DistroBootstrap {
             Set-ScriptVars
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ""$script:root/install-ansible.sh""" -NoNewWindow -Wait
+            if (-not $SkipAnsibleInstall) {
+              Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ""$script:root/install-ansible.sh""" -NoNewWindow -Wait
+            }
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user root", "--exec ansible-playbook ""$script:root/../playbook-wsl-bootstrap.yml"" -e ""${script:extraVars}""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
         function Start-DistroConfig {
             Set-ScriptVars
-            Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-galaxy install -r ""$script:root/../requirements.yml"" --force" -NoNewWindow -Wait
+            if (-not $SkipGalaxyInstall) {
+              Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-galaxy install -r ""$script:root/../requirements.yml"" --force" -NoNewWindow -Wait
+            }
             Start-Process -FilePath wsl.exe -ArgumentList "--distribution $DistroName", "--user $($script:cred.UserName)", "--exec ansible-playbook ""$script:root/../playbook-wsl-config.yml"" -e ""${script:extraVars}""" -NoNewWindow -Wait
             Stop-UbuntuDistro
         }
