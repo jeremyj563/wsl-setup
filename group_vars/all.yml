@@ -23,6 +23,7 @@ apt_packages:
   - make
   - mlocate
   - nano
+  - ncdu
   - neovim
   - net-tools
   - openssh-client
