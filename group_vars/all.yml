@@ -78,6 +78,7 @@ brew_packages:
   - teller
   - terraform
   - tig
+  - yarn
   - yq
   - zx
 
