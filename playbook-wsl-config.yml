@@ -15,6 +15,7 @@
     - apt
     - brew
     - git
+    - helm
     - krew
     - nvm
     - pip

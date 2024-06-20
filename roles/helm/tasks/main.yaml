@@ -1,0 +1,8 @@
+---
+- name: Install and upgrade helm plugins
+  kubernetes.core.helm_plugin:
+    plugin_path: "{{ plugin }}"
+    state: present
+  with_items: "{{ helm_plugins }}"
+  loop_control:
+    loop_var: plugin

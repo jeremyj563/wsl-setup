@@ -101,6 +101,11 @@ git_global_aliases:
   wrm: worktree remove
   wmv: worktree move
 
+# helm
+helm_plugins:
+  - https://github.com/databus23/helm-diff
+  - https://github.com/adamreese/helm-env
+
 # krew
 krew_bin_path: "{{ brew_path }}/kubectl-krew"
 krew_version: latest
