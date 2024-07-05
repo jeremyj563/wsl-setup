@@ -45,7 +45,6 @@ brew_path: /home/linuxbrew/.linuxbrew/bin
 brew_bin_path: "{{ brew_path }}/brew"
 brew_repos:
   - Azure/kubelogin
-  - loft-sh/tap
   - stefanprodan/tap
 brew_packages:
   - argocd
