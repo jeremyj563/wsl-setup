@@ -67,7 +67,6 @@ brew_packages:
   - kubectx
   - kubeseal
   - kustomize
-  - loft-sh/tap/vcluster-experimental
   - nvm
   - oh-my-posh
   - openssl
@@ -81,6 +80,7 @@ brew_packages:
   - teller
   - terraform
   - tig
+  - vcluster
   - yarn
   - yq
   - zx
