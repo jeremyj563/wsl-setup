@@ -130,6 +130,7 @@ pip_packages:
   - awscliv2>=2.2.0
   - boto3>=1.26.155
   - bs4>=0.0.1
+  - git-remote-codecommit>=1.17
   - kubernetes>=26.1.0
   # - pykerberos==1.2.4
   # - pyvmomi==7.0.3
