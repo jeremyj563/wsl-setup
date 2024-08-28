@@ -1,0 +1,2 @@
+binaries_local_install_directory: /home/{{ linux_username }}/.local/bin
+binaries_include_tasks_fileglob: bin-*.yaml

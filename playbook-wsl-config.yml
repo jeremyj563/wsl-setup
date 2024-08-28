@@ -13,12 +13,13 @@
     ansible_become_password: "{{ linux_password }}"
   roles:
     - apt
+    - binaries
     - brew
     - git
     - helm
+    - k9s
     - krew
     - nvm
     - pip
     - shell
     - workspace
-    - k9s

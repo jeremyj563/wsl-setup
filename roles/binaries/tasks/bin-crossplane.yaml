@@ -1,0 +1,11 @@
+- name: Download [crossplane] install script
+  ansible.builtin.uri:
+    return_content: yes
+    url: https://raw.githubusercontent.com/crossplane/crossplane/master/install.sh
+  register: installer
+
+- name: Run [crossplane] install script
+  ansible.builtin.shell:
+    chdir: "{{ binaries_local_install_directory }}"
+    cmd: sh -s -- -y
+    stdin: "{{ installer.content }}"

@@ -156,6 +156,7 @@ bashrc_scripts:
   - oh-my-posh.sh
   - pyenv.sh
   - ssh.sh
+  - variables.sh
 
 # workspace
 workspace_default_dir: jeremyj563

@@ -1,0 +1,12 @@
+- name: "Ensure bin directory exists: [{{ binaries_local_install_directory }}]"
+  ansible.builtin.file:
+    path: "{{ binaries_local_install_directory }}"
+    state: directory
+    mode: '0755'
+
+- name: 'Include all tasks matching pattern "{{ binaries_include_tasks_fileglob }}"'
+  include_tasks: "{{ binary }}"
+  with_fileglob:
+  - "{{ binaries_include_tasks_fileglob }}"
+  loop_control:
+    loop_var: binary
