@@ -26,9 +26,11 @@ apt_packages:
   - ncdu
   - neovim
   - net-tools
+  - nmap
   - openssh-client
   - openssh-server
   - p7zip-full
+  - postgresql-client
   - python-is-python3
   - python3-pip
   - sudo
@@ -66,14 +68,12 @@ brew_packages:
   - kubectx
   - kubeseal
   - kustomize
-  - nmap
   - nvm
   - oh-my-posh
   - openssl
   - pnpm
   - pipx
   - poetry
-  - postgresql-client
   - pyenv
   - pyenv-virtualenv
   - python-setuptools
