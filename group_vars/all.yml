@@ -47,6 +47,7 @@ brew_path: /home/linuxbrew/.linuxbrew/bin
 brew_bin_path: "{{ brew_path }}/brew"
 brew_repos:
   - Azure/kubelogin
+  - nat-n/poethepoet
   - stefanprodan/tap
 brew_packages:
   - argocd
@@ -68,6 +69,7 @@ brew_packages:
   - kubectx
   - kubeseal
   - kustomize
+  - nat-n/poethepoet/poethepoet
   - nvm
   - oh-my-posh
   - openssl
